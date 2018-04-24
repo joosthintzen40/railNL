@@ -1,5 +1,5 @@
 import csv
-
+# Rutger
 class Vertex:
     def __init__(self, node):
         self.id = node
