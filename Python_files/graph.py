@@ -25,6 +25,9 @@ class Graph:
         self.vert_dict = {}
         self.num_vertices = 0
 
+    #def __str__(self):
+
+
     def __iter__(self):
         return iter(self.vert_dict.values())
 
@@ -52,6 +55,9 @@ class Graph:
     def get_vertices(self):
         return self.vert_dict.keys()
 
+    def get_edges(self):
+        return self.vert_dict
+
 if __name__ == '__main__':
 
     g = Graph()
@@ -61,14 +67,17 @@ if __name__ == '__main__':
         for row in nlreader:
             g.add_vertex(row[0])
             g.add_vertex(row[1])
+            print(row[2])
+            g.add_edge(row[0], row[1], row[2])
 
-            g.add_edge(row[0], row[1])
             #lists.append(row)
             #g.add_vertex(lists)
 
             #list.append(lists)
         print(g.get_vertices())
-
+        print(Vertex("Amsterdam Centraal"))
+        print(Vertex("Amsterdam Centraal").get_connections())
+        #print(g.get_edges())
 
     # g = Graph()
     #
