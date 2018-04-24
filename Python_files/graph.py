@@ -71,23 +71,18 @@ if __name__ == '__main__':
             print(row[2])
             g.add_edge(row[0], row[1], row[2])
 
-<<<<<<< HEAD
-            g.add_edge(row[0], row[1], row[2])
-=======
->>>>>>> 4cc7e24ccaa784182b2b82f11f43814374b3bc44
+
             #lists.append(row)
             #g.add_vertex(lists)
 
             #list.append(lists)
-<<<<<<< HEAD
+
         print(v.get_weight())
 
-=======
         print(g.get_vertices())
         print(Vertex("Amsterdam Centraal"))
         print(Vertex("Amsterdam Centraal").get_connections())
         #print(g.get_edges())
->>>>>>> 4cc7e24ccaa784182b2b82f11f43814374b3bc44
 
     # g = Graph()
     #
