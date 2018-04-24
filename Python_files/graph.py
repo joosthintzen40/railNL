@@ -25,9 +25,6 @@ class Graph:
         self.vert_dict = {}
         self.num_stations = 0
 
-    #def __str__(self):
-
-
     def __iter__(self):
         return iter(self.vert_dict.values())
 
@@ -63,41 +60,40 @@ class Graph:
 if __name__ == '__main__':
 
     g = Graph()
+    # g.add_station('a')
+    # g.add_station('b')
+    # g.add_station('c')
+    # g.add_station('d')
+    # g.add_station('e')
+    # g.add_station('f')
+    #
+    # g.add_connection('a', 'b', 7)
+    # g.add_connection('a', 'c', 9)
+    # g.add_connection('a', 'f', 14)
+    # g.add_connection('b', 'c', 10)
+    # g.add_connection('b', 'd', 15)
+    # g.add_connection('c', 'd', 11)
+    # g.add_connection('c', 'f', 2)
+    # g.add_connection('d', 'e', 6)
+    # g.add_connection('e', 'f', 9)
     with open('ConnectiesHolland.csv', 'r') as csvfile:
         nlreader = csv.reader(csvfile)
 
         for row in nlreader:
             g.add_station(row[0])
             g.add_station(row[1])
+        for row in nlreader:
             g.add_connection(row[0], row[1], int(row[2]))
-            print(row[0])
-            print(row[1])
+
+        #print(g.get_stations())
 
 
-            #lists.append(row)
-            #g.add_vertex(lists)
 
-            #list.append(lists)
-        #print(g.get_edges())
+    for v in g:
+        for w in v.get_connections():
+            vid = v.get_id()
+            wid = w.get_id()
+            print ('( %s, %s, %3d)'  % ( vid, wid, v.get_distance(w)))
 
-        # for v in g:
-        #     for w in v.get_connections():
-        #         vid = v.get_id()
-        #         wid = w.get_id()
-        #         print ('( %s , %s, %3d)'  % ( vid, wid, v.get_distance(w)))
-
-        for v in g:
-            print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
-
-        #print(g.get_edges())
-
-    # g = Graph()
-    #
-    # g.add_vertex('den helder')
-    # g.add_edge('den helder', 'alkmaar', 36)
-    #
-    # for v in g:
-    #     for w in v.get_connections():
-    #         vid = v.get_id()
-    #         wid = w.get_id()
-    #         print ('( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w)))
+    for v in g:
+        print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
