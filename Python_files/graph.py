@@ -38,7 +38,7 @@ class Graph:
         if n in self.vert_dict:
             return self.vert_dict[n]
         else:
-            return print("hello")
+            return None
 
     def add_edge(self, frm, to, cost = 0):
         if frm not in self.vert_dict:
@@ -50,24 +50,25 @@ class Graph:
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
 
     def get_vertices(self):
-        return self.vert_dict.keys()
+        return iter()
 
 if __name__ == '__main__':
 
     g = Graph()
-    with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
+    v = Vertex()
+    with open('ConnectiesHolland.csv', 'r') as csvfile:
         nlreader = csv.reader(csvfile)
 
         for row in nlreader:
             g.add_vertex(row[0])
             g.add_vertex(row[1])
 
-            g.add_edge(row[0], row[1])
+            g.add_edge(row[0], row[1], row[2])
             #lists.append(row)
             #g.add_vertex(lists)
 
             #list.append(lists)
-        print(g.get_vertices())
+        print(v.get_weight())
 
 
     # g = Graph()
