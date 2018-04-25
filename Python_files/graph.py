@@ -30,9 +30,12 @@ class Graph:
 
     def add_station(self, node):
         self.num_stations = self.num_stations + 1
-        new_station = Station(node)
-        self.vert_dict[node] = new_station
-        return new_station
+        if node not in self.vert_dict:
+            new_station = Station(node)
+            self.vert_dict[node] = new_station
+            return new_station
+        else:
+            return None
 
     def get_station(self, n):
         if n in self.vert_dict:
@@ -59,41 +62,25 @@ class Graph:
 
 if __name__ == '__main__':
 
+    # making new graph
     g = Graph()
-    # g.add_station('a')
-    # g.add_station('b')
-    # g.add_station('c')
-    # g.add_station('d')
-    # g.add_station('e')
-    # g.add_station('f')
-    #
-    # g.add_connection('a', 'b', 7)
-    # g.add_connection('a', 'c', 9)
-    # g.add_connection('a', 'f', 14)
-    # g.add_connection('b', 'c', 10)
-    # g.add_connection('b', 'd', 15)
-    # g.add_connection('c', 'd', 11)
-    # g.add_connection('c', 'f', 2)
-    # g.add_connection('d', 'e', 6)
-    # g.add_connection('e', 'f', 9)
+
+    # loading in stations and connections
     with open('ConnectiesHolland.csv', 'r') as csvfile:
         nlreader = csv.reader(csvfile)
-
         for row in nlreader:
             g.add_station(row[0])
             g.add_station(row[1])
-        for row in nlreader:
             g.add_connection(row[0], row[1], int(row[2]))
 
-        #print(g.get_stations())
 
-
-
+    # presentation of all possible connections and distances of map
     for v in g:
         for w in v.get_connections():
             vid = v.get_id()
             wid = w.get_id()
             print ('( %s, %s, %3d)'  % ( vid, wid, v.get_distance(w)))
 
+    # presentation of all stations and their neighboring stations
     for v in g:
         print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
