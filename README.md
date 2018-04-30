@@ -7,16 +7,18 @@ Van deze 22 stations zijn er 7 door RailNL als kritiek bestempeld: Alkmaar, Amst
 Namen
 -------------
 Joost Hintzen, 10434143
+
 Rutger van Heijningen, 102722224
+
 Simon Kemmere, 10798250
 
 
 Aan de slag
 -------------
-###### Vereisten
-Deze codebase is volledig geschreven in Python3.6.3.
+### Vereisten
+Deze codebase is volledig geschreven in [Python3.6.3](https://www.python.org/downloads/).
 
-Structuur
+### Structuur
 Python files (waaronder de datastructuur) kunnen gevonden worden in de
 python_files map.
 De visualisatie van de case en de andere gebruikte afbeeldingen in bijvoorbeeld
@@ -24,10 +26,10 @@ de presentaties kunnen gevonden worden in de map Afbeeldingen.
 In de map Data kunnen de verschillende in te laden .csv files gevonden worden.
 In de map Presentaties kunnen de verschillende presentaties gevonden worden.
 
-Test
+### Test
 Om de code te draaien met de standaardeconfiguratie gebruik de instructie:
 
-python graph.py
+`python graph.py`
 
 Dankwoord
 -------------
