@@ -1,4 +1,4 @@
-railNL
+RailNL
 -------------
 In de provincies Noord- en Zuid-Holland liggen in totaal 118 treinstations, waarvan de 22 belangrijkste intercitystations met de tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, gegeven zijn.
 
@@ -20,14 +20,14 @@ Deze codebase is volledig geschreven in [Python3.6.3](https://www.python.org/dow
 
 ### Structuur
 Python files (waaronder de datastructuur) kunnen gevonden worden in de
-python_files map.
+Python_files map.
 De visualisatie van de case en de andere gebruikte afbeeldingen in bijvoorbeeld
 de presentaties kunnen gevonden worden in de map Afbeeldingen.
 In de map Data kunnen de verschillende in te laden .csv files gevonden worden.
 In de map Presentaties kunnen de verschillende presentaties gevonden worden.
 
 ### Test
-Om de code te draaien met de standaardeconfiguratie gebruik de instructie:
+Om de code te draaien met de standaardconfiguratie gebruik de instructie:
 
 `python graph.py`
 
