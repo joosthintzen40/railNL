@@ -1,0 +1,12 @@
+Logboek
+---------------
+Week 1: Onderzoek gedaan naar verscheidene algoritmen. Daarbij hebben wij gevonden
+dat het Dijkstra's algoritme, en de varianten daar op, wel van toepassing kan zijn.
+Daarnaast hebben wij gevonden dat het A* algoritme en Breadth First Search (BFS)
+algoritme eventueel onze case kan oplossen.
+
+Week 2: Opzet gemaakt voor de datastructuur. We kwamen uit op het gebruik van
+een undirected weighted graph. Hiervoor hebben wij nu verschillende classes aangemaakt.
+Deze zijn te vinden in graph.py. Ook hebben we de github repository aangepast naar de standaard die verwacht wordt. Dat betekent overzichtelijk en de bijbehorende bestanden samen in een map. Daarnaast is deze week Rutger bij ons team gekomen en hebben wij hem up to speed gebracht.
+
+Week 3: Readme aangepast zodat de structuur goed is. Brainstormen over de eerste algoritmen. Idee voor nu is dat we voor 1a een aantal treinen breadth first gaan onderzoeken.
