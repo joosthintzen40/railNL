@@ -1,33 +1,36 @@
-# railNL
+RailNL
+-------------
+In de provincies Noord- en Zuid-Holland liggen in totaal 118 treinstations, waarvan de 22 belangrijkste intercitystations met de tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, gegeven zijn.
+
+Van deze 22 stations zijn er 7 door RailNL als kritiek bestempeld: Alkmaar, Amsterdam Centraal, Den Haag Centraal, Gouda, Haarlem, Rotterdam Centraal en Zaandam. Als deze stations niet regelmatig aangedaan worden treden er in de Randstad enorme logistieke problemen op door de grote aantallen overstappers op deze stations. De spoorverbindingen van en naar deze stations worden daarom kritieke verbindingen genoemd.
 
 Namen
 -------------
-Joost Hintzen
-Rutger van Heijningen
-Simon Kemmere
+Joost Hintzen, 10434143
 
-Studentnummers
---------------
-10434143
-Nan
-10798250
+Rutger van Heijningen, 102722224
 
-Inleiding
---------------
+Simon Kemmere, 10798250
+
+
+Aan de slag
+-------------
+### Vereisten
+Deze codebase is volledig geschreven in [Python3.6.3](https://www.python.org/downloads/).
+
+### Structuur
 Python files (waaronder de datastructuur) kunnen gevonden worden in de
-python_files map.
+Python_files map.
 De visualisatie van de case en de andere gebruikte afbeeldingen in bijvoorbeeld
 de presentaties kunnen gevonden worden in de map Afbeeldingen.
 In de map Data kunnen de verschillende in te laden .csv files gevonden worden.
 In de map Presentaties kunnen de verschillende presentaties gevonden worden.
 
-Logboek
----------------
-Week 1: Onderzoek gedaan naar verscheidene algoritmen. Daarbij hebben wij gevonden
-dat het Dijkstra's algoritme, en de varianten daar op, wel van toepassing kan zijn.
-Daarnaast hebben wij gevonden dat het A* algoritme en Breadth First Search (BFS)
-algoritme eventueel onze case kan oplossen.
+### Test
+Om de code te draaien met de standaardconfiguratie gebruik de instructie:
 
-Week 2: Opzet gemaakt voor de datastructuur. We kwamen uit op het gebruik van
-een undirected weighted graph. Hiervoor hebben wij nu verschillende classes aangemaakt.
-Deze zijn te vinden in graph.py. Ook hebben we de github repository aangepast naar de standaard die verwacht wordt. Dat betekent overzichtelijk en de bijbehorende bestanden samen in een map. Daarnaast is deze week Rutger bij ons team gekomen en hebben wij hem up to speed gebracht.
+`python graph.py`
+
+Dankwoord
+-------------
+Minor programmeren van de UvA.
