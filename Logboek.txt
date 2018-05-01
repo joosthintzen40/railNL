@@ -10,3 +10,5 @@ een undirected weighted graph. Hiervoor hebben wij nu verschillende classes aang
 Deze zijn te vinden in graph.py. Ook hebben we de github repository aangepast naar de standaard die verwacht wordt. Dat betekent overzichtelijk en de bijbehorende bestanden samen in een map. Daarnaast is deze week Rutger bij ons team gekomen en hebben wij hem up to speed gebracht.
 
 Week 3: Readme aangepast zodat de structuur goed is. Brainstormen over de eerste algoritmen. Idee voor nu is dat we voor 1a een aantal treinen breadth first gaan onderzoeken.
+
+test
