@@ -1,22 +1,5 @@
 import csv
 
-class Make:
-    def __init__(self, begin):
-        g = Graph()
-
-        # loading in stations and connections
-        with open('ConnectiesHolland.csv', 'r') as csvfile:
-            nlreader = csv.reader(csvfile)
-            for row in nlreader:
-                g.add_station(row[0])
-                g.add_station(row[1])
-                g.add_connection(row[0], row[1], int(row[2]))
-
-        for v in g:
-            print ('[%s] : %s' %s
-
-
-
 class Station:
     def __init__(self, node):
         self.id = node
@@ -75,26 +58,26 @@ class Graph:
     def get_connections(self):
         return self.vert_dict
 
+    print(vert_dict)
+
 
 
 if __name__ == '__main__':
 
-    # # making new graph
-    # g = Graph()
-    #
-    # # loading in stations and connections
-    # with open('ConnectiesHolland.csv', 'r') as csvfile:
-    #     nlreader = csv.reader(csvfile)
-    #     for row in nlreader:
-    #         g.add_station(row[0])
-    #         g.add_station(row[1])
-    #         g.add_connection(row[0], row[1], int(row[2]))
+    # making new graph
+    g = Graph()
+    # s = Station()
 
-    m = Make(["Den Helder"])
-
+    # loading in stations and connections
+    with open('ConnectiesHolland.csv', 'r') as csvfile:
+        nlreader = csv.reader(csvfile)
+        for row in nlreader:
+            g.add_station(row[0])
+            g.add_station(row[1])
+            g.add_connection(row[0], row[1], int(row[2]))
 
 
-    # # presentation of all possible connections and distances of map
+    # #presentation of all possible connections and distances of map
     # for v in g:
     #     for w in v.get_connections():
     #         vid = v.get_id()
@@ -104,3 +87,14 @@ if __name__ == '__main__':
     # # presentation of all stations and their neighboring stations
     # for v in g:
     #     print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
+    #
+    #
+    # vid = [0].get_id()
+    # wid = [0].get_id()
+    # w = [0].get_connections():
+    #     print ('( %s, %s, %3d)'  % ( vid, wid, [0].get_distance([0])))
+    #
+    # print(g.vert_dict["Alkmaar"])
+    # print(
+
+    # print(
