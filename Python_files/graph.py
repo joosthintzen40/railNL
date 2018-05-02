@@ -1,4 +1,30 @@
 import csv
+import math
+
+# class trajections:
+#     def __init__(self):
+#         g = Graph()
+#         with open('ConnectiesHolland.csv', 'r') as csvfile:
+#             nlreader = csv.reader(csvfile)
+#             for row in nlreader:
+#                 g.add_station(row[0])
+#                 g.add_station(row[1])
+#                 g.add_connection(row[0], row[1], int(row[2]))
+#         self.trajections = []
+#
+#     def tree(self, begin, totdistance=0):
+#         for v in g:
+#             if v == begin:
+#                 for w in v.get_connections():
+#
+
+    #
+    #
+    # def find(self, node, i):
+    #     if node[i] == i:
+    #         return
+    #     return self.find(node, node[i])
+
 
 class Station:
     def __init__(self, node):
@@ -6,7 +32,7 @@ class Station:
         self.adjacent = {}
 
     def __str__(self):
-        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
+        return str(self.id) + ' is adjacent to: ' + str([x.id for x in self.adjacent])
 
     def add_neighbor(self, neighbor, distance=0):
         self.adjacent[neighbor] = distance
@@ -55,10 +81,6 @@ class Graph:
     def get_stations(self):
         return self.vert_dict.keys()
 
-    def get_connections(self):
-        return self.vert_dict
-
-
 
 if __name__ == '__main__':
 
@@ -75,12 +97,67 @@ if __name__ == '__main__':
 
 
     # presentation of all possible connections and distances of map
-    for v in g:
-        for w in v.get_connections():
-            vid = v.get_id()
-            wid = w.get_id()
-            print ('( %s, %s, %3d)'  % ( vid, wid, v.get_distance(w)))
+    # for v in g:
+    #     for w in v.get_connections():
+    #         vid = v.get_id()
+    #         wid = w.get_id()
+    #         print ('( %s, %s, %3d)'  % ( vid, wid, v.get_distance(w)))
 
     # presentation of all stations and their neighboring stations
-    for v in g:
-        print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
+    # for v in g:
+    #     print ('%s' %(g.vert_dict[v.get_id()]))
+
+    def dijkstra(graph, begin, goal):
+        shortest_distance = {}
+        previous = {}
+        unvisited_stations = graph.vert_dict
+        infinity = math.inf
+        path = []
+
+        #print(unvisited_stations)
+        for station in unvisited_stations:
+            shortest_distance[station] = infinity
+        shortest_distance[begin] = 0
+        #print(shortest_distance)
+        while unvisited_stations:
+            min_node = None
+            for node in unvisited_stations:
+                if min_node is None:
+                    min_node = node
+                elif shortest_distance[node] < shortest_distance[min_node]:
+                    min_node = node
+            print(unvisited_stations)
+
+            for nodes in graph:
+                for neighbor, distance in nodes.adjacent.items():
+                    #print("distance from {} to {} is {}".format(nodes, neighbor, distance))
+                    # if distance < shortest_distance[min_node]:
+                    #     shortest_distance[min_node] = distance
+                    #     previous[min_node] = neighbor
+                    #     distance += shortest_distance[min_node]
+                    #     print(previous)
+                    if distance + shortest_distance[min_node] < shortest_distance[neighbor]:
+                        shortest_distance[neighbor] = distance + shortest_distance[min_node]
+                        previous[neighbor] = min_node
+                        print(previous)
+            #print(previous)
+            unvisited_stations.pop(min_node)
+
+        #print(shortest_distance)
+        current = goal
+        while current != begin:
+            print(current)
+            try:
+                path.insert(0, current)
+                current = previous[current]
+            except KeyError:
+                print("path not reachable")
+                break
+
+        path.insert(0, begin)
+        if shortest_distance[goal] != infinity:
+            print("shortest distance is " + str(shortest_distance[goal]))
+            print("the path is" + str(path))
+
+    dijkstra(g, 'Den Helder', 'Amsterdam Centraal')
+    print("DONE")
