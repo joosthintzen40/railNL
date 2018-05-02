@@ -1,6 +1,10 @@
 import csv
 
+def __repr__(self):
+    return
+
 nlreader = {}
+
 
 with open('ConnectiesHolland.csv', 'r') as csvfile:
       nlreader = csv.reader(csvfile)

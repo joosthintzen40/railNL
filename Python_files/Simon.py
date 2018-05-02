@@ -58,9 +58,6 @@ class Graph:
     def get_connections(self):
         return self.vert_dict
 
-    print(vert_dict)
-
-
 
 if __name__ == '__main__':
 
@@ -88,13 +85,13 @@ if __name__ == '__main__':
     # for v in g:
     #     print ('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
     #
-    #
-    # vid = [0].get_id()
-    # wid = [0].get_id()
-    # w = [0].get_connections():
-    #     print ('( %s, %s, %3d)'  % ( vid, wid, [0].get_distance([0])))
-    #
-    # print(g.vert_dict["Alkmaar"])
-    # print(
 
-    # print(
+    vid = [0].get_id()
+    wid = [0].get_id()
+    w = [0].get_connections():
+        print ('( %s, %s, %3d)'  % ( vid, wid, [0].get_distance([0])))
+
+    print(g.vert_dict["Alkmaar"])
+    print(
+
+    print(
