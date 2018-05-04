@@ -35,10 +35,15 @@ for i in totaal:
 # Fastest time variable and count variable
 lowest = 120
 count = 0
+traject = []
 
 # Check for fastest connection
 for i["Tijd"] in temp_array:
+    # last = i["Tijd"]["Begin"]
     if i["Tijd"]["Tijd"] < lowest:
-        lowest = i["Tijd"]["Tijd"]
-        closest = i["Tijd"]
+        # if last != i["Tijd"]["Eind"]:
+            lowest = i["Tijd"]["Tijd"]
+            closest = i["Tijd"]
+
 print closest
+# print last
