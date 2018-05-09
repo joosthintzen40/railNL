@@ -1,5 +1,5 @@
-# RailNL #
-##########
+# RailNL
+# Greedy Algorithm
 
 # Import
 import csv
