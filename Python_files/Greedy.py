@@ -1,5 +1,5 @@
-# RailNL #
-##########
+# RailNL
+# Greedy Algorithm
 
 # Import
 import csv
@@ -36,10 +36,21 @@ for i in totaal:
 # Fastest time variable and count variable
 lowest = 120
 count = 0
+traject = []
 
 # Check for fastest connection
 for i["Tijd"] in temp_array:
+    # last = i["Tijd"]["Begin"]
     if i["Tijd"]["Tijd"] < lowest:
+<<<<<<< HEAD:Python_files/test_r.py
         lowest = i["Tijd"]["Tijd"]
         closest = i["Tijd"]
 print (closest)
+=======
+        # if last != i["Tijd"]["Eind"]:
+            lowest = i["Tijd"]["Tijd"]
+            closest = i["Tijd"]
+
+print closest
+# print last
+>>>>>>> 4a0fb418db09b7dc5246c0a441c1c75cbbceea8c:Python_files/Greedy.py
