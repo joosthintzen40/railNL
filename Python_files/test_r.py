@@ -5,7 +5,7 @@
 import csv
 
 # Load CSV
-with open('ConnectiesHolland_test.csv', 'rb') as csvfile:
+with open('ConnectiesHolland_test.csv', 'r') as csvfile:
     data = list(csv.reader(csvfile))
 
 # New dict for all connections
@@ -20,6 +20,7 @@ for i in data:
     totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2]})
     temp_dict += 1
 
+print(data)
 # Temp array and temp variable
 temp_array = []
 temp = 0
@@ -41,4 +42,4 @@ for i["Tijd"] in temp_array:
     if i["Tijd"]["Tijd"] < lowest:
         lowest = i["Tijd"]["Tijd"]
         closest = i["Tijd"]
-print closest
+print (closest)
