@@ -1,5 +1,6 @@
 import csv
 import math
+import random
 
 
 class Station:
@@ -63,8 +64,10 @@ class Graph:
 
 if __name__ == '__main__':
 
+
     # making new graph
     g = Graph()
+
 
     # loading in stations and connections
     with open('ConnectiesHolland.csv', 'r') as csvfile:
@@ -74,69 +77,102 @@ if __name__ == '__main__':
             g.add_station(row[1])
             g.add_connection(row[0], row[1], int(row[2]))
 
+
+    # for v in g:
+    #     for w in v.get_connections():
+    #         vid = v.get_id()
+    #         wid = w.get_id()
+    #         print('( %s , %s, %3d)'  % ( vid, wid, v.get_distance(w)))
+    #
+    # for v in g:
+    #     print('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
+
     # dijkstra greedy algorithm
     def dijkstra(graph, begin):
-        #goal = None
-        shortest_distance = {}
-        previous = {}
-        unvisited_stations = graph.vert_dict
-        infinity = math.inf
-        path = []
+      shortest_distance = {}
+      previous = {}
+      unvisited_stations = graph.vert_dict
+      infinity = math.inf
+      path = []
 
 
-        for station in unvisited_stations:
-            shortest_distance[station] = infinity
-        shortest_distance[begin] = 0
+      for station in unvisited_stations:
+          shortest_distance[station] = infinity
+      shortest_distance[begin] = 0
 
-        breaker = False
-        while unvisited_stations:
-            min_node = None
-            for node in unvisited_stations:
-                if min_node is None:
-                    min_node = node
-                elif shortest_distance[node] < shortest_distance[min_node]:
-                    min_node = node
-
-
-            for neighbor, distance in graph.vert_dict[min_node].adjacent.items():
-
-                if distance + shortest_distance[min_node] < shortest_distance[neighbor.id]:
-                    shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
-                    previous[neighbor.id] = min_node
-                #print(neighbor.id)
-                if shortest_distance[neighbor.id] > 120:
-                    shortest_distance.pop(neighbor.id)
-                    # previous.pop(neighbor.id)
-                    #print(neighbor.id)
-                    #print(previous)
-                    goal = previous[neighbor.id]
-                    print(goal)
-                    breaker = True
-                    break
-                #elif :
-
-                print(goal)
-            if breaker:
-                break
-
-            unvisited_stations.pop(min_node)
+      breaker = False
+      while unvisited_stations:
+          min_node = None
+          for node in unvisited_stations:
+              if min_node is None:
+                  min_node = node
+              elif shortest_distance[node] < shortest_distance[min_node]:
+                  min_node = node
 
 
-        current = goal
-        while current != begin:
-            try:
-                path.insert(0, current)
-                current = previous[current]
-            except KeyError:
-                print("path not reachable")
-                break
+          for neighbor, distance in graph.vert_dict[min_node].adjacent.items():
 
-        path.insert(0, begin)
-        if shortest_distance[goal] != infinity:
-            print("shortest distance is " + str(shortest_distance[goal]))
-            print("the path is" + str(path))
+              if distance + shortest_distance[min_node] < shortest_distance[neighbor.id]:
+                  shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
+                  previous[neighbor.id] = min_node
+                  goal = previous[neighbor.id]
 
+              if shortest_distance[neighbor.id] > 120:
+                  shortest_distance.pop(neighbor.id)
+                  #previous.pop(neighbor.id)
+                  #print(neighbor.id)
+                  #print(previous)
+                  goal = previous[neighbor.id]
+                  breaker = True
+                  break
+
+
+
+          if breaker:
+              break
+
+          unvisited_stations.pop(min_node)
+
+
+      current = goal
+      while current != begin:
+
+          try:
+              path.insert(0, current)
+              current = previous[current]
+          except KeyError:
+              print("path not reachable")
+              break
+
+      path.insert(0, begin)
+      if shortest_distance[goal] != infinity:
+          print("shortest distance is " + str(shortest_distance[goal]))
+          print("the path is" + str(path))
+      print(goal)
+      goal = None
+      shortest_distance.clear()
+      previous.clear()
 
     # calling of dijkstra algorithm
+    counter = 0
+    list_stations = []
+    with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+        stationreader = csv.reader(stationsfile)
+        for row in stationreader:
+            list_stations.append(row[0])
+
+
+        # print(station)
+
+        # print(row[0])
+    #for i in range(6):
+        #print(random.choice(list_stations))
     dijkstra(g, "Amsterdam Centraal")
+    dijkstra(g, "Den Haag Centraal")
+    dijkstra(g, random.choice(list_stations))
+    dijkstra(g, random.choice(list_stations))
+    dijkstra(g, random.choice(list_stations))
+    # counter += 1
+    # if counter == 6:
+    #     break
     print("DONE")
