@@ -65,17 +65,7 @@ class Graph:
 if __name__ == '__main__':
 
 
-    # making new graph
-    g = Graph()
-
-
-    # loading in stations and connections
-    with open('ConnectiesHolland.csv', 'r') as csvfile:
-        nlreader = csv.reader(csvfile)
-        for row in nlreader:
-            g.add_station(row[0])
-            g.add_station(row[1])
-            g.add_connection(row[0], row[1], int(row[2]))
+    
 
 
     # for v in g:
@@ -88,10 +78,25 @@ if __name__ == '__main__':
     #     print('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
 
     # dijkstra greedy algorithm
-    def dijkstra(graph, begin):
+    def dijkstra(begin):
+      
+      # making new graph
+      g = Graph()
+
+
+      # loading in stations and connections
+      with open('ConnectiesHolland.csv', 'r') as csvfile:
+        nlreader = csv.reader(csvfile)
+        for row in nlreader:
+            g.add_station(row[0])
+            g.add_station(row[1])
+            g.add_connection(row[0], row[1], int(row[2]))
+      
+      
+      
       shortest_distance = {}
       previous = {}
-      unvisited_stations = graph.vert_dict
+      unvisited_stations = g.vert_dict
       infinity = math.inf
       path = []
 
@@ -110,7 +115,7 @@ if __name__ == '__main__':
                   min_node = node
 
 
-          for neighbor, distance in graph.vert_dict[min_node].adjacent.items():
+          for neighbor, distance in g.vert_dict[min_node].adjacent.items():
 
               if distance + shortest_distance[min_node] < shortest_distance[neighbor.id]:
                   shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
@@ -130,10 +135,10 @@ if __name__ == '__main__':
 
           if breaker:
               break
-
+          print(g.vert_dict)
           unvisited_stations.pop(min_node)
 
-
+      print(g.vert_dict)
       current = goal
       while current != begin:
 
@@ -149,14 +154,12 @@ if __name__ == '__main__':
           print("shortest distance is " + str(shortest_distance[goal]))
           print("the path is" + str(path))
       print(goal)
-      goal = None
-      shortest_distance.clear()
-      previous.clear()
+      
 
     # calling of dijkstra algorithm
     counter = 0
     list_stations = []
-    with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+    with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
         stationreader = csv.reader(stationsfile)
         for row in stationreader:
             list_stations.append(row[0])
@@ -167,11 +170,12 @@ if __name__ == '__main__':
         # print(row[0])
     #for i in range(6):
         #print(random.choice(list_stations))
-    dijkstra(g, "Amsterdam Centraal")
-    dijkstra(g, "Den Haag Centraal")
-    dijkstra(g, random.choice(list_stations))
-    dijkstra(g, random.choice(list_stations))
-    dijkstra(g, random.choice(list_stations))
+    dijkstra("Amsterdam Centraal")
+    
+    dijkstra("Den Haag Centraal")
+    dijkstra(random.choice(list_stations))
+    dijkstra(random.choice(list_stations))
+    dijkstra(random.choice(list_stations))
     # counter += 1
     # if counter == 6:
     #     break
