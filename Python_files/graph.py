@@ -61,6 +61,7 @@ class Graph:
 
     def get_stations(self):
         return self.vert_dict.keys()
+
 class Score:
     def __init__(self, p, train, min):
         self.p = p
@@ -163,7 +164,7 @@ def dijkstra(begin):
     if shortest_distance[goal] != infinity:
         print("shortest distance is " + str(shortest_distance[goal]))
         print("the path is" + str(path))
-
+    # else:
 
     # make p for score function
 
@@ -177,7 +178,7 @@ def dijkstra(begin):
 
 
 # calling of dijkstra algorithm
-counter = 0
+
 list_stations = []
 with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
@@ -192,18 +193,22 @@ score_list = []
 
 
 dijkstra('Den Helder')
-for j in range(10000):
-    for i in range(6):
+
+for j in range(1):
+    for i in range(5):
         dijkstra(random.choice(list_stations))
-    print('#'*100)
+    print(j)
     p_list = list(chain.from_iterable(p_path))
     path_set = set(map(tuple, p_list))
     check_set = set(map(tuple, check_list))
     p_dif = path_set.symmetric_difference(check_set)
     p = (len(check_list) - len(p_dif))/len(check_list)
     print(p)
-    score = Score( p, 6, sum(minutes))
+    score = Score( p, 5, sum(minutes))
     score_list.append(score.get_score())
+
+archive_file = open('archivefile.csv', 'a')
+
 print(max(score_list))
 
 print("DONE")
