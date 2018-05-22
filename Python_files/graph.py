@@ -140,10 +140,13 @@ def dijkstra(begin):
 
 
 
+        unvisited_stations.pop(min_node)
+
         if breaker:
+
             break
         #print(g.vert_dict)
-        unvisited_stations.pop(min_node)
+
 
 
     current = goal
@@ -161,12 +164,9 @@ def dijkstra(begin):
             break
 
 
-    if shortest_distance[goal] != infinity:
-        print("shortest distance is " + str(shortest_distance[goal]))
-        print("the path is" + str(path))
-    # else:
-
-    # make p for score function
+    # if shortest_distance[goal] != infinity:
+    #     print("shortest distance is " + str(shortest_distance[goal]))
+    #     print("the path is" + str(path))
 
     # append to p_path to get p
     p_path.append(path)
@@ -179,11 +179,7 @@ def dijkstra(begin):
 
 # calling of dijkstra algorithm
 
-list_stations = []
-with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
-    stationreader = csv.reader(stationsfile)
-    for row in stationreader:
-        list_stations.append(row[0])
+
 
 p_path = []
 minutes = []
@@ -194,20 +190,39 @@ score_list = []
 
 dijkstra('Den Helder')
 
-for j in range(1):
-    for i in range(5):
-        dijkstra(random.choice(list_stations))
+
+for j in range(1000):
+    list_stations = []
+    with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+        stationreader = csv.reader(stationsfile)
+        for row in stationreader:
+            list_stations.append(row[0])
+    for i in range(6):
+        station = random.choice(list_stations)
+        list_stations.remove(station)
+        dijkstra(station)
+        # print('#'*30)
+        # else:
+        #     station = random.choice(list_stations)
+        #     if station is same:
     print(j)
     p_list = list(chain.from_iterable(p_path))
-    path_set = set(map(tuple, p_list))
-    check_set = set(map(tuple, check_list))
-    p_dif = path_set.symmetric_difference(check_set)
-    p = (len(check_list) - len(p_dif))/len(check_list)
-    print(p)
-    score = Score( p, 5, sum(minutes))
+
+
+    path_list = list(map(tuple,p_list))
+    uniq = set()
+    for s in path_list:
+        if not (s in uniq or (s[1], s[0]) in uniq):
+            uniq.add(s)
+
+
+    p = len(list(uniq))/28
+
+
+    score = Score(p, 6, sum(minutes))
     score_list.append(score.get_score())
 
-archive_file = open('archivefile.csv', 'a')
+# archive_file = open('archivefile.csv', 'a')
 
 print(max(score_list))
 
