@@ -1,7 +1,7 @@
 import csv
 import math
 import random
-from critical_connections import check_list
+from critical_connections_simon import check_list
 from itertools import chain
 
 class Station:
@@ -82,22 +82,21 @@ class Score:
 # for v in g:
 #     print('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
 
+# making new graph
+g = Graph()
+
+
+# loading in stations and connections
+with open('ConnectiesHolland.csv', 'r') as csvfile:
+    nlreader = csv.reader(csvfile)
+    for row in nlreader:
+        g.add_station(row[0])
+        g.add_station(row[1])
+        g.add_connection(row[0], row[1], int(row[2]))
+
+
 # dijkstra greedy algorithm
 def dijkstra(begin):
-
-
-    # making new graph
-    g = Graph()
-
-
-    # loading in stations and connections
-    with open('ConnectiesHolland.csv', 'r') as csvfile:
-        nlreader = csv.reader(csvfile)
-        for row in nlreader:
-            g.add_station(row[0])
-            g.add_station(row[1])
-            g.add_connection(row[0], row[1], int(row[2]))
-
 
 
     shortest_distance = {}
@@ -106,13 +105,12 @@ def dijkstra(begin):
     infinity = math.inf
     path = []
 
-
-
     for station in unvisited_stations:
         shortest_distance[station] = infinity
     shortest_distance[begin] = 0
 
     breaker = False
+    # huidig = []
     while unvisited_stations:
         min_node = None
         for node in unvisited_stations:
@@ -128,6 +126,7 @@ def dijkstra(begin):
                 shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
                 previous[neighbor.id] = min_node
                 goal = previous[neighbor.id]
+                # huidig.append(goal)
 
             if shortest_distance[neighbor.id] > 120:
                 shortest_distance.pop(neighbor.id)
@@ -142,12 +141,11 @@ def dijkstra(begin):
 
         unvisited_stations.pop(min_node)
 
+
+
         if breaker:
 
             break
-        #print(g.vert_dict)
-
-
 
     current = goal
     while current != begin:
@@ -173,7 +171,7 @@ def dijkstra(begin):
 
 
     # make list of minutes per trajectory
-    minutes.append(shortest_distance[goal])
+    minutes.append(shortest_distance[current])
 
 
 
@@ -184,27 +182,25 @@ def dijkstra(begin):
 p_path = []
 minutes = []
 score_list = []
-#print(check_list)
+list_stations = []
 
-
-
-dijkstra('Den Helder')
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+    stationreader = csv.reader(stationsfile)
+    for row in stationreader:
+        list_stations.append(row[0])
 
 
 for j in range(1000):
-    list_stations = []
-    with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
-        stationreader = csv.reader(stationsfile)
-        for row in stationreader:
-            list_stations.append(row[0])
+    lijst = []
+
     for i in range(6):
         station = random.choice(list_stations)
+        lijst.append(station)
         list_stations.remove(station)
         dijkstra(station)
-        # print('#'*30)
-        # else:
-        #     station = random.choice(list_stations)
-        #     if station is same:
+
+    list_stations.extend(lijst)
+
     print(j)
     p_list = list(chain.from_iterable(p_path))
 
@@ -215,15 +211,12 @@ for j in range(1000):
         if not (s in uniq or (s[1], s[0]) in uniq):
             uniq.add(s)
 
-
     p = len(list(uniq))/28
-
 
     score = Score(p, 6, sum(minutes))
     score_list.append(score.get_score())
 
-# archive_file = open('archivefile.csv', 'a')
-
 print(max(score_list))
+
 
 print("DONE")
