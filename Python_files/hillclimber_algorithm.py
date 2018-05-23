@@ -26,7 +26,7 @@ for i in data:
     totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2], "M":temp_dict})
     temp_dict += 1
 
-def run():
+def start_position():
     # Random start station
     random_start = totaal[randint(0, (len(totaal)-1))]["Begin"]
 
@@ -56,8 +56,8 @@ def run():
 
     # Create 5 trains
     for i in range(amount_of_trains):
-        print ""
-        print "Train %s" %(i + 1)
+        # print("")
+        # print("Train %s" %(i + 1))
         br = 0
         time = 0
         score = 0
@@ -78,7 +78,7 @@ def run():
                 if 0.9 < random.uniform(0, 1):
                     break
 
-            print connect
+            # print connect
             score += connect["Tijd"]
             dienstregeling[i].append(connect)
 
@@ -120,17 +120,24 @@ def run():
     p = float(tracks_left) / len(totaal)
     Traject_score = (p * 10000 - ((amount_of_trains * 20) + (total_minutes / 10)))
 
-    # print Traject_score
+    return Traject_score, dienstregeling
 
-    return Traject_score
+def hillclimber(tracks):
+    print tracks[0]
 
-# Run algorithm n times
-max_score = 0
+def main():
+    # Run algorithm n times
+    max_score = 0
 
-for _ in range(1):
-    h_score = run()
-    if h_score > max_score:
-        max_score = h_score
+    for _ in range(1):
+        h_score, tracks = start_position()
+        hillclimber(tracks)
+        if h_score > max_score:
+            max_score = h_score
 
-# Print maximum traject score
-print "Maximum Score = %i" %(max_score)
+    # Print maximum traject score
+    # print("Maximum Score = %i" %(max_score))
+
+# Run script
+if __name__ == "__main__":
+    main()
