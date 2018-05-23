@@ -2,7 +2,7 @@ import csv
 
 check_list = []
 
-with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesNationaal.csv', 'r') as csvfile:
     csvreader = csv.reader(csvfile)
     for connection in csvreader:
         lists = []
