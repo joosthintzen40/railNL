@@ -1,7 +1,7 @@
 import csv
 import math
 import random
-from critical_connections import check_list
+from critical_connections_simon import check_list
 from itertools import chain
 import copy
 class Station:
@@ -87,7 +87,7 @@ g = Graph()
 
 
 # loading in stations and connections
-with open('ConnectiesHolland.csv', 'r') as csvfile:
+with open('ConnectiesNationaal.csv', 'r') as csvfile:
     nlreader = csv.reader(csvfile)
     for row in nlreader:
         g.add_station(row[0])
@@ -128,7 +128,7 @@ def dijkstra(begin):
                 goal = previous[neighbor.id]
                 # huidig.append(goal)
 
-            if shortest_distance[neighbor.id] > 120:
+            if shortest_distance[neighbor.id] > 180:
                 shortest_distance.pop(neighbor.id)
                 #previous.pop(neighbor.id)
                 #print(neighbor.id)
@@ -179,20 +179,20 @@ score_list = []
 list_stations = []
 count = 0
 
-with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsNationaal.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
     for row in stationreader:
         list_stations.append(row[0])
 
 
-for j in range(10000):
+for j in range(5000):
     p_path = []
     minutes = []
     lijst = []
     path_list = []
     p_list = []
 
-    for i in range(7):
+    for i in range(16):
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
@@ -212,9 +212,9 @@ for j in range(10000):
         if not (s in uniq or (s[1], s[0]) in uniq):
             uniq.add(s)
 
-    p = len(list(uniq))/28
+    p = len(list(uniq))/89
 
-    score = Score(p, 7, sum(minutes))
+    score = Score(p, 16, sum(minutes))
 
     print(score.get_score())
     score_list.insert(0, score.get_score())
