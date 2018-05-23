@@ -1,9 +1,9 @@
 import csv
 import math
 import random
-from critical_connections import check_list
+from critical_connections_simon import check_list
 from itertools import chain
-import copy
+
 class Station:
     def __init__(self, node):
         self.id = node
@@ -101,7 +101,7 @@ def dijkstra(begin):
 
     shortest_distance = {}
     previous = {}
-    unvisited_stations = copy.copy(g.vert_dict)
+    unvisited_stations = g.vert_dict
     infinity = math.inf
     path = []
 
@@ -110,7 +110,7 @@ def dijkstra(begin):
     shortest_distance[begin] = 0
 
     breaker = False
-    # huidig = []
+    huidig = []
     while unvisited_stations:
         min_node = None
         for node in unvisited_stations:
@@ -126,7 +126,8 @@ def dijkstra(begin):
                 shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
                 previous[neighbor.id] = min_node
                 goal = previous[neighbor.id]
-                # huidig.append(goal)
+                huidig.append(goal)
+                print(huidig)
 
             if shortest_distance[neighbor.id] > 120:
                 shortest_distance.pop(neighbor.id)
@@ -175,32 +176,31 @@ def dijkstra(begin):
 
 
 
+# calling of dijkstra algorithm
+
+
+
+p_path = []
+minutes = []
 score_list = []
 list_stations = []
-count = 0
 
-with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
     for row in stationreader:
         list_stations.append(row[0])
 
 
-for j in range(10000):
-    p_path = []
-    minutes = []
+for j in range(1000):
     lijst = []
-    path_list = []
-    p_list = []
 
-    for i in range(7):
+    for i in range(6):
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
         dijkstra(station)
-        count += 1
 
     list_stations.extend(lijst)
-
 
     print(j)
     p_list = list(chain.from_iterable(p_path))
@@ -214,10 +214,8 @@ for j in range(10000):
 
     p = len(list(uniq))/28
 
-    score = Score(p, 7, sum(minutes))
-
-    print(score.get_score())
-    score_list.insert(0, score.get_score())
+    score = Score(p, 6, sum(minutes))
+    score_list.append(score.get_score())
 
 print(max(score_list))
 
