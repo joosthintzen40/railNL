@@ -1,9 +1,9 @@
 import csv
 import math
 import random
-from critical_connections_simon import check_list
+from critical_connections import check_list
 from itertools import chain
-a
+import copy
 class Station:
     def __init__(self, node):
         self.id = node
@@ -101,7 +101,7 @@ def dijkstra(begin):
 
     shortest_distance = {}
     previous = {}
-    unvisited_stations = g.vert_dict
+    unvisited_stations = copy.copy(g.vert_dict)
     infinity = math.inf
     path = []
 
@@ -184,22 +184,23 @@ minutes = []
 score_list = []
 list_stations = []
 
-with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
     for row in stationreader:
         list_stations.append(row[0])
 
 
-for j in range(1000):
+for j in range(100):
     lijst = []
 
-    for i in range(6):
+    for i in range(5):
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
         dijkstra(station)
 
     list_stations.extend(lijst)
+    print(lijst, '####', list_stations)
 
     print(j)
     p_list = list(chain.from_iterable(p_path))
@@ -213,8 +214,10 @@ for j in range(1000):
 
     p = len(list(uniq))/28
 
-    score = Score(p, 6, sum(minutes))
-    score_list.append(score.get_score())
+    score = Score(p, 5, sum(minutes))
+    
+    print(score.get_score())
+    score_list.insert(0, score.get_score())
 
 print(max(score_list))
 
