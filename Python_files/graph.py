@@ -188,9 +188,8 @@ score_list = []
 
 
 
+
 dijkstra('Den Helder')
-
-
 for j in range(1000):
     list_stations = []
     with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
@@ -220,10 +219,10 @@ for j in range(1000):
 
 
     score = Score(p, 6, sum(minutes))
-    score_list.append(score.get_score())
+    if score.get_score() > 6000:
+        score_list.append(score.get_score())
 
 # archive_file = open('archivefile.csv', 'a')
 
-print(max(score_list))
 
 print("DONE")
