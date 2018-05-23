@@ -56,8 +56,8 @@ def run():
 
     # Create 5 trains
     for i in range(amount_of_trains):
-        print ""
-        print "Train %s" %(i + 1)
+        # print("")
+        # print("Train %s" %(i + 1))
         br = 0
         time = 0
         score = 0
@@ -78,7 +78,7 @@ def run():
                 if 0.9 < random.uniform(0, 1):
                     break
 
-            print connect
+            # print(connect)
             score += connect["Tijd"]
             dienstregeling[i].append(connect)
 
@@ -127,10 +127,10 @@ def run():
 # Run algorithm n times
 max_score = 0
 
-for _ in range(1):
+for _ in range(100000):
     h_score = run()
     if h_score > max_score:
         max_score = h_score
 
 # Print maximum traject score
-print "Maximum Score = %i" %(max_score)
+print("Maximum Score = %i" %(max_score))
