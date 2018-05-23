@@ -3,7 +3,7 @@ import math
 import random
 from critical_connections_simon import check_list
 from itertools import chain
-
+a
 class Station:
     def __init__(self, node):
         self.id = node
