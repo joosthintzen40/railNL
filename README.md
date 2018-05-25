@@ -21,17 +21,26 @@ Aan de slag
 Deze codebase is volledig geschreven in [Python3.6.3](https://www.python.org/downloads/).
 
 ### Structuur
-Python files (waaronder de datastructuur) kunnen gevonden worden in de
-Python_files map.
+Python files kunnen gevonden worden in de Python_files map. Binnen deze map
+kunnen weer een aantal mappen gevonden die elk een algoritme en eventuele
+helperfiles bevatten.
+
 De visualisatie van de case en de andere gebruikte afbeeldingen in bijvoorbeeld
-de presentaties kunnen gevonden worden in de map Afbeeldingen.
+de presentaties kunnen gevonden worden in de map Visualisaties.
+
 In de map Data kunnen de verschillende in te laden .csv files gevonden worden.
+Daarnaast bevindt zich in deze map de datastrutuur van de graaf.
+
 In de map Presentaties kunnen de verschillende presentaties gevonden worden.
 
 ### Test
 Om de code te draaien met de standaardconfiguratie gebruik de instructie:
 
 `python main.py`
+
+Achter het runnen van dit bestand zit het idee dat de gebruiker door het gebruik
+van de algoritmen heen geleid wordt. Zo wordt er aan de user gevraagd welk
+algoritme er gerund moet worden en met welke configuratie.
 
 Dankwoord
 -------------
