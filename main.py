@@ -9,6 +9,7 @@ from itertools import chain
 import copy
 import sys
 import random
+import os
 
 
 print('-'*100)
@@ -44,6 +45,7 @@ while True:
                         print('try again')
                         continue
                     else:
+                        os.system('cls')
                         holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
                         run_greedy_dijkstra.run_greedy(connectionsHolland, holland)
                         break
@@ -57,6 +59,7 @@ while True:
                     print('try again')
                     continue
                 else:
+                    os.system('cls')
                     nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
                     run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
                     break
@@ -78,6 +81,7 @@ while True:
                         print('try again')
                         continue
                     else:
+                        os.system('cls')
                         holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
                         run_greedy.run_greedy(connectionsHolland, holland)
                         break
@@ -91,6 +95,7 @@ while True:
                     print('try again')
                     continue
                 else:
+                    os.system('cls')
                     nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
                     run_greedy.run_greedy(connectionsNationaal, nationaal)
                     break
@@ -112,6 +117,7 @@ while True:
                         print('try again')
                         continue
                     else:
+                        os.system('cls')
                         totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
                         hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                         break
@@ -125,6 +131,7 @@ while True:
                     print('try again')
                     continue
                 else:
+                    os.system('cls')
                     totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
                     hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                     break
@@ -146,6 +153,7 @@ while True:
                         print('try again')
                         continue
                     else:
+                        os.system('cls')
                         totaal = run_random_algorithm.load_map(connectionsHolland)
                         random_algorithm.main(maps, train_random, totaal)
                         break
@@ -159,6 +167,7 @@ while True:
                     print('try again')
                     continue
                 else:
+                    os.system('cls')
                     totaal = run_random_algorithm.load_map(connectionsNationaal)
                     random_algorithm.main(maps, train_random, totaal)
                     break
