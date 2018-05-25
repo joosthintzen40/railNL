@@ -1,3 +1,11 @@
+# Hintzen, Joost - 10434143
+# Heijningen, Rutger van - 10272224
+# Kemmere, Simon - 10798250
+#
+# Function that runs Dijkstra algorithm and calculates it´s score.
+# Data that gets loaded in depends on the configuration chosen in
+# main.py.
+
 from Data.datastructuur_graph import Graph
 from Python_files.Greedy import run_greedy
 import csv
@@ -8,6 +16,7 @@ import copy
 import sys
 
 
+# class that when called upon calculates the end score
 class Score:
     def __init__(self, p, train, min):
         self.p = p
@@ -17,14 +26,25 @@ class Score:
     def get_score(self):
         return self.p*10000 - (self.train*20 + self.min/10)
 
+
+# class that gets called upon by main.py
 class Holland:
 
     def __init__(self, train, directory):
+
+        # instantiate directory path
         self.dir = directory
+
+        # instantiate graph class
         self.graph = Graph()
+
+        # instantiate amount of trains
         self.train = train
+
+        # call method with instantiated directory
         self.get_graph(self.dir)
 
+    # method that loads connections and it´s corresponding distance
     def get_graph(self, dir):
         with open(dir, 'r') as csvfile:
             nlreader = csv.reader(csvfile)
@@ -38,23 +58,29 @@ class Holland:
 # dijkstra greedy algorithm
 def dijkstra(begin, holland, p_path, minutes):
 
-
+    # instantiate variables/dicts/lists
     shortest_distance = {}
     previous = {}
     unvisited_stations = copy.deepcopy(holland.graph.vert_dict)
     infinity = math.inf
     path = []
 
+    # set all distances in unvisited stations to infinity
     for station in unvisited_stations:
         shortest_distance[station] = infinity
     shortest_distance[begin] = 0
 
     breaker = False
     while unvisited_stations:
+
+        # if no next station is given, i.e., first iteration
+        # get begin station from method
         min_node = None
         for node in unvisited_stations:
             if min_node is None:
                 min_node = node
+
+            # else next station is begin station
             elif shortest_distance[node] < shortest_distance[min_node]:
                 min_node = node
 
