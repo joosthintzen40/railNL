@@ -75,7 +75,30 @@ class Score:
     def get_score(self):
         return self.p*10000 - (self.train*20 + self.min/10)
 
+class Holland:
+    def __init__(self):
+        self.dir = 'C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv'
+        self.graph = Graph()
+        self.get_graph()
 
+
+
+    def get_graph(self):
+        with open(self.dir, 'r') as csvfile:
+            nlreader = csv.reader(csvfile)
+            for row in nlreader:
+                self.graph.add_station(row[0])
+                self.graph.add_station(row[1])
+                self.graph.add_connection(row[0], row[1], int(row[2]))
+        return self.graph
+
+
+
+    # def add_train(self):
+
+
+
+# class Nationaal:
 
 # for v in g:
 #     for w in v.get_connections():
@@ -88,23 +111,25 @@ class Score:
 #     print('g.vert_dict[%s]=%s' %(v.get_id(), g.vert_dict[v.get_id()]))
 
 # making new graph
-g = Graph()
+# g = Graph()
+#
+#
+# # loading in stations and connections
+# with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
+#     nlreader = csv.reader(csvfile)
+#     for row in nlreader:
+#         g.add_station(row[0])
+#         g.add_station(row[1])
+#         g.add_connection(row[0], row[1], int(row[2]))
 
-
-# loading in stations and connections
-with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
-    nlreader = csv.reader(csvfile)
-    for row in nlreader:
-        g.add_station(row[0])
-        g.add_station(row[1])
-        g.add_connection(row[0], row[1], int(row[2]))
-
+holland = Holland()
+print(holland)
 
 # greedy algorithm
 def greedy(begin):
 
-    stations = copy.deepcopy(g.vert_dict)
-    unvisited_stations = copy.deepcopy(g.vert_dict)
+    stations = copy.deepcopy(holland.vert_dict)
+    # unvisited_stations = copy.deepcopy(holland.vert_dict)
     infinity = math.inf
     path = []
 
@@ -167,6 +192,17 @@ def greedy(begin):
     # make list of minutes per trajectory
     minutes.append(tot_dist)
 
+
+
+
+
+
+
+
+
+
+
+
 score_list = []
 list_stations = []
 score_max = 0
@@ -194,7 +230,7 @@ for j in range(1000):
     list_stations.extend(lijst)
 
 
-    # print(j)
+    print(j)
     p_list = list(chain.from_iterable(p_path))
 
 
@@ -214,12 +250,6 @@ for j in range(1000):
 
     score_list.insert(0, score_greedy)
 
-train_count = 1
-for i in final_track:
-    print("")
-    print ("Traject of train", train_count)
-    for j in i:
-        print(j)
-    train_count += 1
-print("")
-print("The score of these trajectories account for", score_max, "points")
+print(score_max, final_track)
+
+print("DONE")
