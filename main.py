@@ -22,16 +22,17 @@ connectionsHolland = 'Data/ConnectiesHolland.csv'
 connectionsNationaal = 'Data/ConnectiesNationaal.csv'
 stationsHolland = 'Data/StationsHolland.csv'
 stationsNationaal = 'Data/StationsNationaal.csv'
-train_north = 'How many trains do you want to use?It is only possible to choose a number between 1 and 7'
+train_north = 'How many trains do you want to use? It is only possible to choose a number between 1 and 7'
 train_holland = 'How many trains do you want to use? It is only possible to choose a number between 1 and 20'
 text_maps = 'Which map do you want to use? \n For the map of North and South Holland choose "North" \n For the map of whole of the Netherlands choose "NL"'
 
-print('please fill in which algorithm you want to choose: \n\
-' + '-'*100 + '\n For the Dijkstra Algorithm choose "a" \n For the Greedy Algorithm \
-choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n ')
+
 
 
 while True:
+    print('please fill in which algorithm you want to choose: \n\
+    ' + '-'*100 + '\n For the Dijkstra Algorithm choose "a" \n For the Greedy Algorithm \
+    choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n ')
     algorithm = input()
     if algorithm == "a":
         print(text_maps)
@@ -50,25 +51,26 @@ while True:
                         run_greedy_dijkstra.run_greedy(connectionsHolland, holland)
                         break
 
-                    break
                 break
+
             elif maps == 'NL':
                 print(train_holland)
-                train_dijkstra = int(input())
-                if train_dijkstra > 20 or train_dijkstra < 1:
-                    print('try again')
-                    continue
-                else:
-                    os.system('cls')
-                    nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
-                    run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
-                    break
+                while True:
+                    train_dijkstra = int(input())
+                    if train_dijkstra > 20 or train_dijkstra < 1:
+                        print('try again')
+                        continue
+                    else:
+                        os.system('cls')
+                        nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
+                        run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
+                        break
 
                 break
             else:
                 print('try again')
                 continue
-        break
+
     elif algorithm == "b":
         print(text_maps)
         while True:
@@ -82,29 +84,32 @@ while True:
                         continue
                     else:
                         os.system('cls')
+                        os.system('clear')
                         holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
                         run_greedy.run_greedy(connectionsHolland, holland)
                         break
 
-                    break
                 break
+
             elif maps == 'NL':
                 print(train_holland)
-                train_greedy = int(input())
-                if train_greedy > 20 or train_greedy < 1:
-                    print('try again')
-                    continue
-                else:
-                    os.system('cls')
-                    nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
-                    run_greedy.run_greedy(connectionsNationaal, nationaal)
-                    break
+                while True:
+                    train_greedy = int(input())
+                    if train_greedy > 20 or train_greedy < 1:
+                        print('try again')
+                        continue
+                    else:
+                        os.system('cls')
+                        os.system('clear')
+                        nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
+                        run_greedy.run_greedy(connectionsNationaal, nationaal)
+                        break
 
                 break
             else:
                 print('try again')
                 continue
-        break
+
     elif algorithm == "c":
         print(text_maps)
         while True:
@@ -118,29 +123,32 @@ while True:
                         continue
                     else:
                         os.system('cls')
+                        os.system('clear')
                         totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
                         hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                         break
 
-                    break
                 break
+
             elif maps == 'NL':
                 print(train_holland)
-                train_hillclimber = int(input())
-                if train_hillclimber > 20 or train_hillclimber < 1:
-                    print('try again')
-                    continue
-                else:
-                    os.system('cls')
-                    totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
-                    hillclimber_algorithm.main(maps, train_hillclimber, totaal)
-                    break
+                while True:
+                    train_hillclimber = int(input())
+                    if train_hillclimber > 20 or train_hillclimber < 1:
+                        print('try again')
+                        continue
+                    else:
+                        os.system('cls')
+                        os.system('clear')
+                        totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
+                        hillclimber_algorithm.main(maps, train_hillclimber, totaal)
+                        break
 
                 break
             else:
                 print('try again')
                 continue
-        break
+
     elif algorithm == "d":
         print(text_maps)
         while True:
@@ -154,26 +162,28 @@ while True:
                         continue
                     else:
                         os.system('cls')
+                        os.system('clear')
                         totaal = run_random_algorithm.load_map(connectionsHolland)
                         random_algorithm.main(maps, train_random, totaal)
                         break
 
-                    break
                 break
+
             elif maps == 'NL':
                 print(train_holland)
-                train_random = int(input())
-                if train_random > 20 or train_random < 1:
-                    print('try again')
-                    continue
-                else:
-                    os.system('cls')
-                    totaal = run_random_algorithm.load_map(connectionsNationaal)
-                    random_algorithm.main(maps, train_random, totaal)
-                    break
-
+                while True:
+                    train_random = int(input())
+                    if train_random > 20 or train_random < 1:
+                        print('try again')
+                        continue
+                    else:
+                        os.system('cls')
+                        os.system('clear')
+                        totaal = run_random_algorithm.load_map(connectionsNationaal)
+                        random_algorithm.main(maps, train_random, totaal)
+                        break
                 break
+
             else:
                 print('try again')
                 continue
-        break
