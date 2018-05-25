@@ -64,7 +64,6 @@ def greedy(begin, holland, p_path, minutes):
     infinity = math.inf
     path = []
 
-    breaker = False
     min_node = None
     station = None
     tot_dist = 0
@@ -96,9 +95,6 @@ def greedy(begin, holland, p_path, minutes):
             station = min(neighbor_dict.items(), key=lambda x:x[1])[0]
             distance = min(neighbor_dict.items(), key=lambda x:x[1])[1]
 
-        #
-        if breaker:
-            break
 
         # determine whether total distance + distance of begin station
         # to be will exceed time constraint
