@@ -1,7 +1,10 @@
 # RailNL
-# Random Algorithm
-# Rutger van Heijningen
-# 10272224
+# Hintzen, Joost - 10434143
+# Heijningen, Rutger van - 10272224
+# Kemmere, Simon - 10798250
+#
+# Hillclimber function
+# main.py.
 
 # Import
 import csv
@@ -10,59 +13,6 @@ import copy
 import sys
 from random import randint
 from Python_files.Hillclimber import run_hillclimbing_algorithm
-
-<<<<<<< HEAD
-=======
-# Map variables
-noord_zuid_holland = 1
-nationaal = 2
-
-# Choose which map you want (noord_zuid_holland or nationaal)
-run_map = noord_zuid_holland
-
-# Configurations
-if run_map == 1:
-    min_minutes = 381
-    amount_of_trains = 5
-    amount_of_minutes = 120
-    break_hill_after = 1000
-    run_times = 100
-elif run_map == 2:
-    min_minutes = 1551
-    amount_of_trains = 18
-    amount_of_minutes = 180
-    break_hill_after = 1000
-    run_times = 30
-else:
-    print("No valid map selected!")
-    sys.exit()
-
-# Upperbound Score
-upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
-
-# Load CSV
-if run_map == 1:
-    with open('ConnectiesHolland.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-elif run_map == 2:
-    with open('ConnectiesNationaal.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-else:
-    print("No valid load-file selected!")
-    sys.exit()
-
-# New dict for all connections
-totaal = []
-
-# Temp variable
-temp_dict = 0
-
-# Loading data in totaal
-for i in data:
-    totaal.append({"Begin":data[temp_dict][0], "Eind":data[temp_dict][1], "Tijd":data[temp_dict][2], "M":temp_dict})
-    totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2], "M":temp_dict})
-    temp_dict += 1
->>>>>>> 167ec20ee3886f367a4e71974119d4537af52877
 
 # Create random start formation
 def start_position(totaal, run_map, amount_of_trains, amount_of_minutes):
@@ -263,9 +213,10 @@ def hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill
             minute = 0
             b = 0
 
-            # Loop trajects
+            # Loop traject
             for j in hill_track[a]:
 
+                # Create mirror list
                 minute += hill_track[a][b]["Tijd"]
                 mirror = hill_track[a][b]["M"]
                 mirror_list.append(mirror)
@@ -295,7 +246,7 @@ def hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill
         p = float(tracks_left) / (len(totaal)/2.)
         traject_score = ((p * 10000) - (amount_of_trains * 20 + total_minutes / 10.))
 
-        # Safe highest P per hillclimber
+        # Store highest P per hillclimber
         if p > high_p:
             high_p = p
             best_track = copy.copy(hill_track)
@@ -422,7 +373,7 @@ def main(maps, trains, totaal):
     # Variables
     hill_score = 0
     final_score = 0
-    algorithm_counter = 0
+    count = 0
     average = 0
     p_times = 0
 
@@ -441,29 +392,23 @@ def main(maps, trains, totaal):
         if p_value == 1.0:
             p_times += 1
 
-        algorithm_counter += 1
+        count += 1
 
         # Counter
-        sys.stdout.write("Hillclimber count = %i\r" %(algorithm_counter))
+        sys.stdout.write("\rHillclimber count = %i" %(count))
         sys.stdout.flush()
 
     # Fine tuning track
-<<<<<<< HEAD
     fine_tune_track = copy.deepcopy(final_track)
     master_track, master_score = fine_tune(fine_tune_track, amount_of_trains)
-=======
-    fine_tune_track = copy.copy(final_track)
-    master_track, master_score = fine_tune(fine_tune_track)
-    print master_score
->>>>>>> 167ec20ee3886f367a4e71974119d4537af52877
 
     # Print maximum traject score
     print("\n")
     print("Amount of times p has a value of 1.0 = %i" %(p_times))
     print("")
-    print("Average Score = %.2f" %(average/algorithm_counter))
+    print("Average Score = %.2f" %(average/count))
     print("Highest Score = %.2f" %(final_score))
-    print("Fine tuned Score = %.2f" %(final_score + master_score))
+    print("Finetuned Score = %.2f" %(master_score))
     print("")
 
     # Layout
