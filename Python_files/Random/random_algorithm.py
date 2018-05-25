@@ -1,7 +1,11 @@
-# RailNL
-# Random Algorithm
-# Rutger van Heijningen
-# 10272224
+# Hintzen, Joost - 10434143
+# Heijningen, Rutger van - 10272224
+# Kemmere, Simon - 10798250
+#
+# Function that runs the determines every next connection of a train path,
+# functioning within the given time constraits.
+# Data that gets loaded in depends on the configuration chosen in
+# main.py.
 
 # Import
 import csv
