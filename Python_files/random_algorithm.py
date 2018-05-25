@@ -1,18 +1,53 @@
 # RailNL
 # Random Algorithm
+# Rutger van Heijningen
+# 10272224
 
 # Import
 import csv
-from random import randint
 import random
 import copy
+import sys
+from random import randint
 
 # Configuration
 amount_of_trains = 5
 
+# Map variables
+noord_zuid_holland = 1
+nationaal = 2
+
+# Choose which map you want (noord_zuid_holland or nationaal)
+run_map = noord_zuid_holland
+
+# Configurations
+if run_map == 1:
+    min_minutes = 381
+    amount_of_trains = 5
+    amount_of_minutes = 120
+    run_times = 10000
+elif run_map == 2:
+    min_minutes = 1551
+    amount_of_trains = 18
+    amount_of_minutes = 180
+    run_times = 1000
+else:
+    print("No valid map selected!")
+    sys.exit()
+
+# Upperbound Score
+upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
+
 # Load CSV
-with open('ConnectiesHolland.csv', 'r') as csvfile:
-    data = list(csv.reader(csvfile))
+if run_map == 1:
+    with open('ConnectiesHolland.csv', 'r') as csvfile:
+        data = list(csv.reader(csvfile))
+elif run_map == 2:
+    with open('ConnectiesNationaal.csv', 'r') as csvfile:
+        data = list(csv.reader(csvfile))
+else:
+    print("No valid load-file selected!")
+    sys.exit()
 
 # New dict for all connections
 totaal = []
@@ -26,7 +61,9 @@ for i in data:
     totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2], "M":temp_dict})
     temp_dict += 1
 
+# Random algorithm
 def run():
+
     # Random start station
     random_start = totaal[randint(0, (len(totaal)-1))]["Begin"]
 
@@ -52,12 +89,16 @@ def run():
         return traject
 
     # Array
-    dienstregeling = [[],[],[],[],[],[],[]]
+    if run_map == 1:
+        dienstregeling = [[],[],[],[],[],[],[]]
+    elif run_map == 2:
+        dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    else:
+        print("No valid array selected!")
+        sys.exit()
 
     # Create 5 trains
     for i in range(amount_of_trains):
-        print ""
-        print "Train %s" %(i + 1)
         br = 0
         time = 0
         score = 0
@@ -78,7 +119,6 @@ def run():
                 if 0.9 < random.uniform(0, 1):
                     break
 
-            print connect
             score += connect["Tijd"]
             dienstregeling[i].append(connect)
 
@@ -117,20 +157,92 @@ def run():
     tracks_left = len(totaal) - len(all_tracks)
 
     # Score function
-    p = float(tracks_left) / len(totaal)
-    Traject_score = (p * 10000 - ((amount_of_trains * 20) + (total_minutes / 10)))
+    p = float(tracks_left) / (len(totaal)/2.)
+    traject_score = ((p * 10000) - (amount_of_trains * 20 + total_minutes / 10.))
 
-    # print Traject_score
+    return traject_score, dienstregeling
 
-    return Traject_score
+# Layout function
+def layout_1():
 
-# Run algorithm n times
-max_score = 0
+    # Welcome text
+    if run_map == 1:
+        print("__________________________________________________________")
+        print("Running Random Algorithm on the map 'Noord & Zuid Holland'")
+        print("__________________________________________________________")
+    elif run_map == 2:
+        print("_______________________________________________")
+        print("Running Random Algorithm on the map 'Nederland'")
+        print("_______________________________________________")
+    else:
+        print("No valid map selected!")
+        sys.exit()
 
-for _ in range(1):
-    h_score = run()
-    if h_score > max_score:
-        max_score = h_score
+    print("")
 
-# Print maximum traject score
-print "Maximum Score = %i" %(max_score)
+    # Configuration text
+    print("Amount of trains = %i" %(amount_of_trains))
+    print("Amount of times random runs = %i" %(run_times))
+    print("Upperbound Score = %.2f" %(upperbound))
+    print("")
+
+# Layout function
+def layout_2():
+
+    # Layout
+    if run_map == 1:
+        print("__________________________________________________________")
+    if run_map == 2:
+        print("_______________________________________________")
+
+# Main
+def main():
+
+    # Welcome & configuration text
+    layout_1()
+
+    # Run algorithm n times
+    max_score = 0
+    average = 0
+    count = 0
+
+    # Run algorithm n times
+    for _ in range(run_times):
+        # Call functions
+        h_score, tracks = run()
+        average += h_score
+
+        if h_score > max_score:
+            max_score = h_score
+            final_track = tracks
+
+        count += 1
+
+        # Counter
+        sys.stdout.write("\rRandom count = %i" %(count))
+        sys.stdout.flush()
+
+    # Print maximum traject score
+    print("\n")
+    print("Average Score = %.2f" %(average/count))
+    print("Maximum Score = %.2f" %(max_score))
+    print("")
+
+    # Layout
+    layout_2()
+
+    train_number = 1
+
+    # Print traject
+    for train in final_track:
+        if train == final_track[amount_of_trains]:
+            break
+        print("")
+        print("Train %i" %(train_number))
+        for track in train:
+            print(track)
+        train_number += 1
+
+# Run script
+if __name__ == "__main__":
+    main()
