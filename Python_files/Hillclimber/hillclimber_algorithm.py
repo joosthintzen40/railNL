@@ -9,59 +9,11 @@ import random
 import copy
 import sys
 from random import randint
+from Python_files.Hillclimber import run_hillclimbing_algorithm
 
-# Map variables
-noord_zuid_holland = 1
-nationaal = 2
-
-# Choose which map you want (noord_zuid_holland or nationaal)
-run_map = noord_zuid_holland
-
-# Configurations
-if run_map == 1:
-    min_minutes = 381
-    amount_of_trains = 5
-    amount_of_minutes = 120
-    break_hill_after = 1000
-    run_times = 1
-elif run_map == 2:
-    min_minutes = 1551
-    amount_of_trains = 18
-    amount_of_minutes = 180
-    break_hill_after = 1000
-    run_times = 30
-else:
-    print("No valid map selected!")
-    sys.exit()
-
-# Upperbound Score
-upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
-
-# Load CSV
-if run_map == 1:
-    with open('ConnectiesHolland.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-elif run_map == 2:
-    with open('ConnectiesNationaal.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-else:
-    print("No valid load-file selected!")
-    sys.exit()
-
-# New dict for all connections
-totaal = []
-
-# Temp variable
-temp_dict = 0
-
-# Loading data in totaal
-for i in data:
-    totaal.append({"Begin":data[temp_dict][0], "Eind":data[temp_dict][1], "Tijd":data[temp_dict][2], "M":temp_dict})
-    totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2], "M":temp_dict})
-    temp_dict += 1
 
 # Create random start formation
-def start_position():
+def start_position(totaal, run_map, amount_of_trains, amount_of_minutes):
 
     # Random start station
     random_start = totaal[randint(0, (len(totaal)-1))]["Begin"]
@@ -88,9 +40,9 @@ def start_position():
         return traject
 
     # Array
-    if run_map == 1:
+    if run_map == 'North':
         dienstregeling = [[],[],[],[],[],[],[]]
-    elif run_map == 2:
+    elif run_map == 'NL':
         dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     else:
         print("No valid array selected!")
@@ -162,7 +114,7 @@ def start_position():
     return traject_score, dienstregeling
 
 # Hillclimber function
-def hillclimber(tracks, h_score):
+def hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill_after, totaal, run_map):
 
     # Hillclimber variables
     hill_track = copy.copy(tracks)
@@ -206,9 +158,9 @@ def hillclimber(tracks, h_score):
             return traject
 
         # Array
-        if run_map == 1:
+        if run_map == 'North':
             dienstregeling = [[],[],[],[],[],[],[]]
-        elif run_map == 2:
+        elif run_map == 'NL':
             dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
         else:
             print("No valid array selected!")
@@ -294,7 +246,7 @@ def hillclimber(tracks, h_score):
     return hill_score, best_track, high_p
 
 # Fine tuning best hillclimber track
-def fine_tune(fine_tune_track):
+def fine_tune(fine_tune_track, amount_of_trains):
 
     # Fine tune
     fine_tune_score = 0
@@ -351,14 +303,14 @@ def fine_tune(fine_tune_track):
     return fine_tuned_track, fine_tune_score
 
 # Layout function
-def layout_1():
+def layout_1(run_map, amount_of_trains, run_times, upperbound, break_hill_after):
 
     # Welcome text
-    if run_map == 1:
+    if run_map == 'North':
         print("_______________________________________________________________")
         print("Running Hillclimber Algorithm on the map 'Noord & Zuid Holland'")
         print("_______________________________________________________________")
-    elif run_map == 2:
+    elif run_map == 'NL':
         print("____________________________________________________")
         print("Running Hillclimber Algorithm on the map 'Nederland'")
         print("____________________________________________________")
@@ -376,19 +328,41 @@ def layout_1():
     print("")
 
 # Layout function
-def layout_2():
+def layout_2(run_map):
 
     # Layout
-    if run_map == 1:
+    if run_map == 'North':
         print("_______________________________________________________________")
-    if run_map == 2:
+    if run_map == 'NL':
         print("____________________________________________________")
 
 # Main
-def main():
+def main(maps, trains, totaal):
+
+    # Choose which map you want (noord_zuid_holland or nationaal)
+    run_map = maps
+    amount_of_trains = trains
+
+    # Configurations
+    if run_map == 'North':
+        min_minutes = 381
+        amount_of_minutes = 120
+        break_hill_after = 1000
+        run_times = 1
+    elif run_map == 'NL':
+        min_minutes = 1551
+        amount_of_minutes = 180
+        break_hill_after = 1000
+        run_times = 30
+    else:
+        print("No valid map selected!")
+        sys.exit()
+
+    # Upperbound Score
+    upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
 
     # Welcome & configuration text
-    layout_1()
+    layout_1(run_map, amount_of_trains, run_times, upperbound, break_hill_after)
 
     # Variables
     hill_score = 0
@@ -401,8 +375,8 @@ def main():
     for _ in range(run_times):
 
         # Call functions
-        h_score, tracks = start_position()
-        hill_score, best_track, p_value = hillclimber(tracks, h_score)
+        h_score, tracks = start_position(totaal, run_map, amount_of_trains, amount_of_minutes)
+        hill_score, best_track, p_value = hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill_after, totaal, run_map)
         average += hill_score
 
         if hill_score > final_score:
@@ -420,7 +394,7 @@ def main():
 
     # Fine tuning track
     fine_tune_track = copy.deepcopy(final_track)
-    master_track, master_score = fine_tune(fine_tune_track)
+    master_track, master_score = fine_tune(fine_tune_track, amount_of_trains)
 
     # Print maximum traject score
     print("\n")
@@ -432,7 +406,7 @@ def main():
     print("")
 
     # Layout
-    layout_2()
+    layout_2(run_map)
 
     train_number = 1
 

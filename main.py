@@ -3,13 +3,12 @@ from Python_files.Greedy import graph_Simon2, run_greedy
 from Python_files.Dijkstra import dijkstra, run_greedy_dijkstra
 from Data.datastructuur_graph import Graph
 from Python_files.Random import run_random_algorithm, random_algorithm
+from Python_files.Hillclimber import run_hillclimbing_algorithm, hillclimber_algorithm
 import csv
 from itertools import chain
 import copy
 import sys
 import random
-
-
 
 
 print('-'*100)
@@ -31,8 +30,6 @@ print('please fill in which algorithm you want to choose: \n\
 choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n ')
 
 
-
-
 while True:
     algorithm = input()
     if algorithm == "a":
@@ -42,12 +39,12 @@ while True:
             if maps == 'North':
                 print(train_north)
                 while True:
-                    train_greedy = int(input())
-                    if train_greedy > 7 or train_greedy < 1:
+                    train_dijkstra = int(input())
+                    if train_dijkstra > 7 or train_dijkstra < 1:
                         print('try again')
                         continue
                     else:
-                        holland = dijkstra.Holland(train_greedy, connectionsHolland)
+                        holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
                         run_greedy_dijkstra.run_greedy(connectionsHolland, holland)
                         break
 
@@ -55,12 +52,12 @@ while True:
                 break
             elif maps == 'NL':
                 print(train_holland)
-                train_greedy = int(input())
-                if train_greedy > 20 or train_greedy < 1:
+                train_dijkstra = int(input())
+                if train_dijkstra > 20 or train_dijkstra < 1:
                     print('try again')
                     continue
                 else:
-                    nationaal = dijkstra.Holland(train_greedy, connectionsNationaal)
+                    nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
                     run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
                     break
 
@@ -110,26 +107,26 @@ while True:
             if maps == 'North':
                 print(train_north)
                 while True:
-                    train_greedy = int(input())
-                    if train_greedy > 7 or train_greedy < 1:
+                    train_hillclimber = int(input())
+                    if train_hillclimber > 7 or train_hillclimber < 1:
                         print('try again')
                         continue
                     else:
-                        holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
-                        run_greedy.run_greedy(connectionsHolland, holland)
+                        totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
+                        hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                         break
 
                     break
                 break
             elif maps == 'NL':
                 print(train_holland)
-                train_greedy = int(input())
-                if train_greedy > 20 or train_greedy < 1:
+                train_hillclimber = int(input())
+                if train_hillclimber > 20 or train_hillclimber < 1:
                     print('try again')
                     continue
                 else:
-                    nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
-                    run_greedy.run_greedy(connectionsNationaal, nationaal)
+                    totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
+                    hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                     break
 
                 break
@@ -157,7 +154,7 @@ while True:
                 break
             elif maps == 'NL':
                 print(train_holland)
-                train_randomy = int(input())
+                train_random = int(input())
                 if train_random > 20 or train_random < 1:
                     print('try again')
                     continue
