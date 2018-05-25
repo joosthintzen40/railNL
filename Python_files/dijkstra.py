@@ -1,7 +1,7 @@
 import csv
 import math
 import random
-from critical_connections import check_list
+from critical_connections_simon import check_list
 from itertools import chain
 import copy
 class Station:
@@ -87,7 +87,7 @@ g = Graph()
 
 
 # loading in stations and connections
-with open('ConnectiesHolland.csv', 'r') as csvfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
     nlreader = csv.reader(csvfile)
     for row in nlreader:
         g.add_station(row[0])
@@ -128,7 +128,7 @@ def dijkstra(begin):
                 goal = previous[neighbor.id]
                 # huidig.append(goal)
 
-            if shortest_distance[neighbor.id] > 120:
+            if shortest_distance[neighbor.id] > 180:
                 shortest_distance.pop(neighbor.id)
                 #previous.pop(neighbor.id)
                 #print(neighbor.id)
@@ -162,7 +162,13 @@ def dijkstra(begin):
             break
 
 
+<<<<<<< HEAD:Python_files/dijkstra.py
 
+=======
+    if shortest_distance[goal] != infinity:
+        print("shortest distance is " + str(shortest_distance[goal]))
+        print("the path is" + str(path))
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76:Python_files/graph.py
 
     # append to p_path to get p
     p_path.append(path)
@@ -177,20 +183,20 @@ score_list = []
 list_stations = []
 count = 0
 
-with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
     for row in stationreader:
         list_stations.append(row[0])
 
 
-for j in range(10000):
+for j in range(1):
     p_path = []
     minutes = []
     lijst = []
     path_list = []
     p_list = []
 
-    for i in range(7):
+    for i in range(1):
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
@@ -212,7 +218,7 @@ for j in range(10000):
 
     p = len(list(uniq))/28
 
-    score = Score(p, 7, sum(minutes))
+    score = Score(p, 1, sum(minutes))
 
     print(score.get_score())
     score_list.insert(0, score.get_score())
