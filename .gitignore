@@ -1,5 +1,6 @@
 # Files to be ignored #
 #######################
+__pycache__/
 .DS_Store
 .DS_Store?
 ._*
