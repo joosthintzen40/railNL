@@ -313,13 +313,13 @@ def layout_1(run_map, amount_of_trains, run_times, upperbound, break_hill_after)
 
     # Welcome text
     if run_map == 'North':
-        print("_______________________________________________________________")
-        print("Running Hillclimber Algorithm on the map 'Noord & Zuid Holland'")
-        print("_______________________________________________________________")
+        print("________________________________________________________________")
+        print("Running Hillclimber Algorithm on the map 'North & South Holland'")
+        print("________________________________________________________________")
     elif run_map == 'NL':
-        print("____________________________________________________")
-        print("Running Hillclimber Algorithm on the map 'Nederland'")
-        print("____________________________________________________")
+        print("______________________________________________________")
+        print("Running Hillclimber Algorithm on the map 'Netherlands'")
+        print("______________________________________________________")
     else:
         print("No valid map selected!")
         sys.exit()
@@ -338,9 +338,9 @@ def layout_2(run_map):
 
     # Layout
     if run_map == 'North':
-        print("_______________________________________________________________")
+        print("________________________________________________________________")
     if run_map == 'NL':
-        print("____________________________________________________")
+        print("______________________________________________________")
 
 # Main
 def main(maps, trains, totaal):
@@ -354,7 +354,7 @@ def main(maps, trains, totaal):
         min_minutes = 381
         amount_of_minutes = 120
         break_hill_after = 1000
-        run_times = 1
+        run_times = 100
     elif run_map == 'NL':
         min_minutes = 1551
         amount_of_minutes = 180
@@ -408,7 +408,7 @@ def main(maps, trains, totaal):
     print("")
     print("Average Score = %.2f" %(average/count))
     print("Highest Score = %.2f" %(final_score))
-    print("Finetuned Score = %.2f" %(master_score))
+    print("Fine tuned Score = %.2f" %(final_score + master_score))
     print("")
 
     # Layout
