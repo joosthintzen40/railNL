@@ -9,60 +9,11 @@ import random
 import copy
 import sys
 from random import randint
+from Python_files.Random import run_random_algorithm
 
-# Configuration
-amount_of_trains = 5
-
-# Map variables
-noord_zuid_holland = 1
-nationaal = 2
-
-# Choose which map you want (noord_zuid_holland or nationaal)
-run_map = noord_zuid_holland
-
-# Configurations
-if run_map == 1:
-    min_minutes = 381
-    amount_of_trains = 5
-    amount_of_minutes = 120
-    run_times = 10000
-elif run_map == 2:
-    min_minutes = 1551
-    amount_of_trains = 18
-    amount_of_minutes = 180
-    run_times = 1000
-else:
-    print("No valid map selected!")
-    sys.exit()
-
-# Upperbound Score
-upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
-
-# Load CSV
-if run_map == 1:
-    with open('ConnectiesHolland.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-elif run_map == 2:
-    with open('ConnectiesNationaal.csv', 'r') as csvfile:
-        data = list(csv.reader(csvfile))
-else:
-    print("No valid load-file selected!")
-    sys.exit()
-
-# New dict for all connections
-totaal = []
-
-# Temp variable
-temp_dict = 0
-
-# Loading data in totaal
-for i in data:
-    totaal.append({"Begin":data[temp_dict][0], "Eind":data[temp_dict][1], "Tijd":data[temp_dict][2], "M":temp_dict})
-    totaal.append({"Begin":data[temp_dict][1], "Eind":data[temp_dict][0], "Tijd":data[temp_dict][2], "M":temp_dict})
-    temp_dict += 1
 
 # Random algorithm
-def run():
+def run(totaal, run_map, amount_of_trains):
 
     # Random start station
     random_start = totaal[randint(0, (len(totaal)-1))]["Begin"]
@@ -89,9 +40,9 @@ def run():
         return traject
 
     # Array
-    if run_map == 1:
+    if run_map == 'North':
         dienstregeling = [[],[],[],[],[],[],[]]
-    elif run_map == 2:
+    elif run_map == 'NL':
         dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     else:
         print("No valid array selected!")
@@ -163,17 +114,17 @@ def run():
     return traject_score, dienstregeling
 
 # Layout function
-def layout_1():
+def layout_1(run_map, amount_of_trains, run_times, upperbound):
 
     # Welcome text
-    if run_map == 1:
-        print("__________________________________________________________")
-        print("Running Random Algorithm on the map 'Noord & Zuid Holland'")
-        print("__________________________________________________________")
-    elif run_map == 2:
-        print("_______________________________________________")
-        print("Running Random Algorithm on the map 'Nederland'")
-        print("_______________________________________________")
+    if run_map == 'North':
+        print("___________________________________________________________")
+        print("Running Random Algorithm on the map 'North & South Holland'")
+        print("___________________________________________________________")
+    elif run_map == 'NL':
+        print("_________________________________________________")
+        print("Running Random Algorithm on the map 'Netherlands'")
+        print("_________________________________________________")
     else:
         print("No valid map selected!")
         sys.exit()
@@ -187,19 +138,40 @@ def layout_1():
     print("")
 
 # Layout function
-def layout_2():
+def layout_2(run_map):
 
     # Layout
-    if run_map == 1:
-        print("__________________________________________________________")
-    if run_map == 2:
-        print("_______________________________________________")
+    if run_map == 'North':
+        print("___________________________________________________________")
+    if run_map == 'NL':
+        print("_________________________________________________")
 
 # Main
-def main():
+def main(maps, trains, totaal):
+
+    # Choose which map you want (noord_zuid_holland or nationaal)
+    run_map = maps
+    amount_of_trains = trains
+
+    # Configurations
+    if run_map == 'North':
+        min_minutes = 381
+        amount_of_minutes = 120
+        run_times = 10000
+    elif run_map == 'NL':
+        min_minutes = 1551
+        amount_of_minutes = 180
+        run_times = 1000
+    else:
+        print("No valid map selected!")
+        sys.exit()
+
+    # Upperbound Score
+    upperbound = ((1 * 10000) - (amount_of_trains * 20 + min_minutes / 10.))
+
 
     # Welcome & configuration text
-    layout_1()
+    layout_1(run_map, amount_of_trains, run_times, upperbound)
 
     # Run algorithm n times
     max_score = 0
@@ -209,7 +181,7 @@ def main():
     # Run algorithm n times
     for _ in range(run_times):
         # Call functions
-        h_score, tracks = run()
+        h_score, tracks = run(totaal, run_map, amount_of_trains)
         average += h_score
 
         if h_score > max_score:
@@ -229,7 +201,7 @@ def main():
     print("")
 
     # Layout
-    layout_2()
+    layout_2(run_map)
 
     train_number = 1
 
