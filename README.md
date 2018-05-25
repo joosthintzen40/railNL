@@ -31,7 +31,7 @@ In de map Presentaties kunnen de verschillende presentaties gevonden worden.
 ### Test
 Om de code te draaien met de standaardconfiguratie gebruik de instructie:
 
-`python graph.py`
+`python main.py`
 
 Dankwoord
 -------------
