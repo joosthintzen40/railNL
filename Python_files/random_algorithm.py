@@ -13,7 +13,6 @@ from random import randint
 # Configuration
 amount_of_trains = 5
 
-
 # Map variables
 noord_zuid_holland = 1
 nationaal = 2
@@ -198,7 +197,7 @@ def layout_2():
 
 # Main
 def main():
-    
+
     # Welcome & configuration text
     layout_1()
 

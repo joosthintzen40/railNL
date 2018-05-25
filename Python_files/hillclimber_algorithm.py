@@ -296,8 +296,6 @@ def hillclimber(tracks, h_score):
             hill_track.insert(swap_number, hill_reverse)
             counter += 1
 
-        # counter += 1
-
     return hill_score, best_track, high_p
 
 # Layout function
