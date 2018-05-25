@@ -1,4 +1,4 @@
-RailNL
+RailNL - Het vinden van de beste lijnvoering in Holland en heel Nederland
 -------------
 In de provincies Noord- en Zuid-Holland liggen in totaal 22 treinstations met tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, die bereden dienen te worden met maximaal 7 treinen.
 ![Noord- en Zuid-Holland](https://github.com/joosthintzen40/railNL/blob/master/Visualisaties/kaart%20noord%20zuidholland.png)
