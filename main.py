@@ -40,7 +40,7 @@ text_maps = 'Which map do you want to use? \n For the map of North and South Hol
 while True:
     print('please fill in which algorithm you want to choose: \n\
     ' + '-'*100 + '\n For the Dijkstra Algorithm choose "a" \n For the Greedy Algorithm \
-    choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n ')
+    choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n To exit type exit \n ')
     algorithm = input()
 
     # based on input certain functions from helperfiles are called
@@ -212,3 +212,5 @@ while True:
             else:
                 print('try again')
                 continue
+    elif algorithm == 'exit':
+        break
