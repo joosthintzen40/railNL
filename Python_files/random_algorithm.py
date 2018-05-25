@@ -225,7 +225,7 @@ def main():
     # Print maximum traject score
     print("\n")
     print("Average Score = %.2f" %(average/count))
-    print("Maximum Score = %.2f" %(max_score))
+    print("Highest Score = %.2f" %(max_score))
     print("")
 
     # Layout

@@ -23,13 +23,13 @@ if run_map == 1:
     amount_of_trains = 5
     amount_of_minutes = 120
     break_hill_after = 1000
-    run_times = 1000
+    run_times = 1
 elif run_map == 2:
     min_minutes = 1551
     amount_of_trains = 18
     amount_of_minutes = 180
     break_hill_after = 1000
-    run_times = 25
+    run_times = 30
 else:
     print("No valid map selected!")
     sys.exit()
@@ -298,6 +298,43 @@ def hillclimber(tracks, h_score):
 
     return hill_score, best_track, high_p
 
+# Fine tuning best hillclimber track
+def fine_tune(fine_tune_track):
+
+    # Fine tune
+    fine_tune_score = 0
+    fine_tune_counter = 0
+    fine_tuned_track = fine_tune_track
+
+    for train in fine_tuned_track:
+        print""
+        if train == fine_tuned_track[amount_of_trains]:
+            break
+        end_1 = (len(train) - 2)
+        end_2 = (len(train) - 1)
+
+        for track in train:
+            print track
+
+        # print train[end_1]
+        # print train[end_2]
+        print""
+        print train[end_1]["M"]
+        print train[end_2]["M"]
+
+        if train[end_1]["M"] == train[end_2]["M"]:
+            print"hello"
+            print train[end_2]
+            train.remove(train[end_2])
+            fine_tune_counter += 1
+        print ""
+
+        for track in train:
+            print track
+        print ""
+
+    return fine_tuned_track, fine_tune_score
+
 # Layout function
 def layout_1():
 
@@ -366,12 +403,17 @@ def main():
         sys.stdout.write("\rHillclimber count = %i" %(count))
         sys.stdout.flush()
 
+    # Fine tuning track
+    fine_tune_track = copy.deepcopy(final_track)
+    master_track, master_score = fine_tune(fine_tune_track)
+
     # Print maximum traject score
     print("\n")
     print("Amount of times p has a value of 1.0 = %i" %(p_times))
     print("")
     print("Average Score = %.2f" %(average/count))
-    print("Maximum Score = %.2f" %(final_score))
+    print("Highest Score = %.2f" %(final_score))
+    print("Finetuned Score = %.2f" %(master_score))
     print("")
 
     # Layout
@@ -382,6 +424,21 @@ def main():
     # Print traject
     for train in final_track:
         if train == final_track[amount_of_trains]:
+            break
+        print("")
+        print("Train %i" %(train_number))
+        for track in train:
+            print(track)
+        train_number += 1
+
+    print("")
+    print("----------> Fine tuning")
+
+    train_number = 1
+
+    # Print traject
+    for train in master_track:
+        if train == master_track[amount_of_trains]:
             break
         print("")
         print("Train %i" %(train_number))
