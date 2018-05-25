@@ -120,17 +120,20 @@ def run():
     p = float(tracks_left) / len(totaal)
     Traject_score = (p * 10000 - ((amount_of_trains * 20) + (total_minutes / 10)))
 
-    # print Traject_score
-
     return Traject_score
 
-# Run algorithm n times
-max_score = 0
+def main():
+    # Run algorithm n times
+    max_score = 0
 
-for _ in range(100000):
-    h_score = run()
-    if h_score > max_score:
-        max_score = h_score
+    for _ in range(1000):
+        h_score = run()
+        if h_score > max_score:
+            max_score = h_score
 
-# Print maximum traject score
-print("Maximum Score = %i" %(max_score))
+    # Print maximum traject score
+    print("Maximum Score = %i" %(max_score))
+
+# Run script
+if __name__ == "__main__":
+    main()
