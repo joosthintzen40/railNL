@@ -4,15 +4,22 @@ import random
 from critical_connections_simon import check_list
 from itertools import chain
 import copy
+<<<<<<< HEAD
+import sys
+=======
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
 
 class Station:
     def __init__(self, node):
         self.id = node
         self.adjacent = {}
 
+<<<<<<< HEAD
+=======
     def __str__(self):
         return str(self.id) + ' is adjacent to: ' + str([x.id for x in self.adjacent])
 
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     def add_neighbor(self, neighbor, distance=0):
         self.adjacent[neighbor] = distance
 
@@ -27,6 +34,10 @@ class Station:
 
     def get_distance(self, neighbor):
         return self.adjacent[neighbor]
+<<<<<<< HEAD
+
+=======
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     def __iter__(self):
         return iter(self.adjacent.values())
 
@@ -76,6 +87,19 @@ class Score:
         return self.p*10000 - (self.train*20 + self.min/10)
 
 class Holland:
+<<<<<<< HEAD
+    def __init__(self, maps, train):
+        self.dir1 = 'C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/ConnectiesHolland.csv'
+        self.dir2 = 'C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/ConnectiesNationaal.csv'
+        self.graph = Graph()
+        self.train = train
+        self.maps = maps
+        self.which_map()
+        
+
+    def get_graph(self, dir):
+        with open(dir, 'r') as csvfile:
+=======
     def __init__(self):
         self.dir = 'C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv'
         self.graph = Graph()
@@ -85,6 +109,7 @@ class Holland:
 
     def get_graph(self):
         with open(self.dir, 'r') as csvfile:
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
             nlreader = csv.reader(csvfile)
             for row in nlreader:
                 self.graph.add_station(row[0])
@@ -92,6 +117,26 @@ class Holland:
                 self.graph.add_connection(row[0], row[1], int(row[2]))
         return self.graph
 
+<<<<<<< HEAD
+    def which_map(self):
+        if self.maps == 'Noord Holland':
+            self.get_graph(self.dir1)
+        elif self.maps == 'Nationaal':
+            self.get_graph(self.dir2)
+        else:
+            print('No valid load-file selected!')
+            sys.exit()
+
+
+
+
+
+
+
+trains = 5
+maps = 'Nationaal'
+holland = Holland(maps, trains)
+=======
 
 
     # def add_train(self):
@@ -124,12 +169,17 @@ class Holland:
 
 holland = Holland()
 print(holland)
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
 
 # greedy algorithm
 def greedy(begin):
 
+<<<<<<< HEAD
+    stations = copy.deepcopy(holland.graph.vert_dict)
+=======
     stations = copy.deepcopy(holland.vert_dict)
     # unvisited_stations = copy.deepcopy(holland.vert_dict)
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     infinity = math.inf
     path = []
 
@@ -148,24 +198,33 @@ def greedy(begin):
         neighbor_dict = {}
         for neighbor, distance in stations[min_node.id].adjacent.items():
 
+<<<<<<< HEAD
+=======
             #if neighbor is None:
                #trajectlist.append(min_node.id)
                #breaker = True
                #break
             # if unvisited_stations[station]
 
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
             neighbor_dict.update({neighbor: distance})
 
             station = min(neighbor_dict.items(), key=lambda x:x[1])[0]
             distance = min(neighbor_dict.items(), key=lambda x:x[1])[1]
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
         if breaker:
             break
 
         if  tot_dist + distance < 181:
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
             trajectlist.append(min_node.id)
         else:
             break
@@ -180,6 +239,12 @@ def greedy(begin):
         path.insert(0, [trajectlist[counter], i])
         counter += 1
 
+<<<<<<< HEAD
+    # append to p_path to get p
+    p_path.append(path)
+
+    #print(path)
+=======
 
     # if tot_dist != infinity:
     #     print("shortest distance is " + str(tot_dist))
@@ -188,6 +253,7 @@ def greedy(begin):
     # append to p_path to get p
     p_path.append(path)
 
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
 
     # make list of minutes per trajectory
     minutes.append(tot_dist)
@@ -207,13 +273,21 @@ score_list = []
 list_stations = []
 score_max = 0
 
+<<<<<<< HEAD
+with open('C:/Users/Koos Hintzen/Documents/GitHub/railNL/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+=======
 with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     stationreader = csv.reader(stationsfile)
     for row in stationreader:
         list_stations.append(row[0])
 
 
+<<<<<<< HEAD
+for j in range(10000):
+=======
 for j in range(1000):
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     p_path = []
     minutes = []
     lijst = []
@@ -221,7 +295,11 @@ for j in range(1000):
     p_list = []
 
 
+<<<<<<< HEAD
+    for i in range(holland.train):
+=======
     for i in range(5):
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
@@ -229,8 +307,13 @@ for j in range(1000):
 
     list_stations.extend(lijst)
 
+<<<<<<< HEAD
+    sys.stdout.write("\riteration: %i" %(j))
+    sys.stdout.flush()
+=======
 
     print(j)
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
     p_list = list(chain.from_iterable(p_path))
 
 
@@ -241,7 +324,11 @@ for j in range(1000):
             uniq.add(s)
 
     p = len(list(uniq))/28
+<<<<<<< HEAD
+    score_greedy = Score(p, holland.train, sum(minutes)).get_score()
+=======
     score_greedy = Score(p, 5, sum(minutes)).get_score()
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76
 
 
     if score_greedy > score_max:
@@ -250,6 +337,18 @@ for j in range(1000):
 
     score_list.insert(0, score_greedy)
 
+<<<<<<< HEAD
+train_count = 1
+for i in final_track:
+    print("")
+    print ("Traject of train", train_count)
+    for j in i:
+        print(j)
+    train_count += 1
+print("")
+print("The score of these trajectories account for", score_max, "points")
+=======
 print(score_max, final_track)
 
 print("DONE")
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76

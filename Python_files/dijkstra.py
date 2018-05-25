@@ -162,9 +162,13 @@ def dijkstra(begin):
             break
 
 
+<<<<<<< HEAD:Python_files/dijkstra.py
+
+=======
     if shortest_distance[goal] != infinity:
         print("shortest distance is " + str(shortest_distance[goal]))
         print("the path is" + str(path))
+>>>>>>> 306fa815bffb5e01b8c45c8d2d0cc5a30fe92e76:Python_files/graph.py
 
     # append to p_path to get p
     p_path.append(path)
