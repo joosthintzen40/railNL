@@ -23,7 +23,7 @@ if run_map == 1:
     amount_of_trains = 5
     amount_of_minutes = 120
     break_hill_after = 1000
-    run_times = 1
+    run_times = 100
 elif run_map == 2:
     min_minutes = 1551
     amount_of_trains = 18
@@ -126,25 +126,30 @@ def start_position():
     total_minutes = 0
     mirror_list = []
 
+    # Loop trains
     for i in dienstregeling:
 
         minute = 0
         b = 0
 
+        # Loop trajects
         for j in dienstregeling[a]:
 
+            # Create mirror list
             minute += dienstregeling[a][b]["Tijd"]
             mirror = dienstregeling[a][b]["M"]
             mirror_list.append(mirror)
 
             b += 1
 
+        # Total time
         total_minutes += minute
         a += 1
 
     ##### P score #####
     all_tracks = copy.copy(totaal)
 
+    # Check for all possible tracks and delete and driven tracks
     for i in all_tracks:
         for j in mirror_list:
             if j == i["M"]:
@@ -153,6 +158,7 @@ def start_position():
                 except:
                     continue
 
+    # Total tracks - tracks driven = tracks left
     tracks_left = len(totaal) - len(all_tracks)
 
     # Score function
@@ -247,11 +253,13 @@ def hillclimber(tracks, h_score):
         total_minutes = 0
         mirror_list = []
 
+        # Loop trains
         for i in hill_track:
 
             minute = 0
             b = 0
 
+            # Loop trajects
             for j in hill_track[a]:
 
                 minute += hill_track[a][b]["Tijd"]
@@ -260,12 +268,14 @@ def hillclimber(tracks, h_score):
 
                 b += 1
 
+            # Total time
             total_minutes += minute
             a += 1
 
         ##### P score #####
         all_tracks = copy.copy(totaal)
 
+        # Check for all possible tracks and delete and driven tracks
         for i in all_tracks:
             for j in mirror_list:
                 if j == i["M"]:
@@ -274,19 +284,24 @@ def hillclimber(tracks, h_score):
                     except:
                         continue
 
+        # Total tracks - tracks driven = tracks left
         tracks_left = len(totaal) - len(all_tracks)
 
+        # Score function
         p = float(tracks_left) / (len(totaal)/2.)
         traject_score = ((p * 10000) - (amount_of_trains * 20 + total_minutes / 10.))
 
+        # Safe highest P per hillclimber
         if p > high_p:
             high_p = p
             best_track = copy.copy(hill_track)
 
+        # Check if score is higher, set counter = 0
         if traject_score > hill_score:
             hill_score = traject_score
             counter = 0
         else:
+            # Check for all possible tracks and delete and driven tracks
             hill_track.remove(hill_track[0])
             hill_track.insert(swap_number, hill_reverse)
             counter += 1
@@ -299,54 +314,42 @@ def fine_tune(fine_tune_track):
     # Fine tune
     fine_tune_score = 0
     fine_tune_counter = 0
-    fine_tuned_track = fine_tune_track
+    fine_tuned_track = copy.copy(fine_tune_track)
+    time_off = []
 
+    # Loop trains
     for train in fine_tuned_track:
-        # print""
         if train == fine_tuned_track[amount_of_trains]:
             break
 
         value = 0
-        traject_place = 0
+        traject_length = len(train)
 
-        while (traject_place < (len(train) - 3)):
-            if train[value]["M"] == train[value + 1]["M"] and train[value + 1]["M"] == train[value + 2]["M"]:
-                train.remove(train[value + 1])
-                train.remove(train[value + 1])
-                traject_place += 3
+        # Check for repeating tracks (3,4 or 5 times same track)
+        while (value < (traject_length - 2)):
+            if train[value]["M"] == train[value + 1]["M"]:
+                if train[value + 1]["M"] == train[value + 2]["M"]:
+                    del train[value + 1]
+                    time_off.append(train[value + 1]["Tijd"])
+                    time_off.append(train[value + 1]["Tijd"])
+                    del train[value + 1]
+                    value += -1
+                    traject_length += -2
+                else:
+                    value += 1
             else:
-                traject_place += 1
-            train_length = len(train)
+                value += 1
 
-            value += 1
+        end_1 = (traject_length - 1)
+        end_2 = (traject_length - 2)
 
-    for train in fine_tuned_track:
-        # print""
-        if train == fine_tuned_track[amount_of_trains]:
-            break
+        # Check for repeating tracks on the end of trains
+        if train[end_2]["M"] == train[end_1]["M"]:
+            time_off.append(train[end_1]["Tijd"])
+            del train[end_1]
 
-        end_1 = (len(train) - 2)
-        end_2 = (len(train) - 1)
-
-        # for track in train:
-        #     print track
-
-        # print train[end_1]
-        # print train[end_2]
-        # print""
-        # print train[end_1]["M"]
-        # print train[end_2]["M"]
-
-        if train[end_1]["M"] == train[end_2]["M"]:
-            # print"hello"
-            # print train[end_2]
-            train.remove(train[end_2])
-            fine_tune_counter += 1
-        # print ""
-        #
-        # for track in train:
-        #     print track
-        # print ""
+    # Raise score with deleted tracks
+    fine_tune_score = (sum(time_off) / 10.)
 
     return fine_tuned_track, fine_tune_score
 
@@ -393,7 +396,7 @@ def main():
     # Variables
     hill_score = 0
     final_score = 0
-    count = 0
+    algorithm_counter = 0
     average = 0
     p_times = 0
 
@@ -412,42 +415,28 @@ def main():
         if p_value == 1.0:
             p_times += 1
 
-        count += 1
+        algorithm_counter += 1
 
         # Counter
-        sys.stdout.write("\rHillclimber count = %i" %(count))
+        sys.stdout.write("Hillclimber count = %i\r" %(algorithm_counter))
         sys.stdout.flush()
 
     # Fine tuning track
-    fine_tune_track = copy.deepcopy(final_track)
+    fine_tune_track = copy.copy(final_track)
     master_track, master_score = fine_tune(fine_tune_track)
+    print master_score
 
     # Print maximum traject score
     print("\n")
     print("Amount of times p has a value of 1.0 = %i" %(p_times))
     print("")
-    print("Average Score = %.2f" %(average/count))
+    print("Average Score = %.2f" %(average/algorithm_counter))
     print("Highest Score = %.2f" %(final_score))
-    print("Finetuned Score = %.2f" %(master_score))
+    print("Fine tuned Score = %.2f" %(final_score + master_score))
     print("")
 
     # Layout
     layout_2()
-
-    train_number = 1
-
-    # Print traject
-    for train in final_track:
-        if train == final_track[amount_of_trains]:
-            break
-        print("")
-        print("Train %i" %(train_number))
-        for track in train:
-            print(track)
-        train_number += 1
-
-    print("")
-    print("----------> Fine tuning")
 
     train_number = 1
 
@@ -464,9 +453,3 @@ def main():
 # Run script
 if __name__ == "__main__":
     main()
-
-##### To Do #####
-# Check Score
-# 3 keer dezelfde M
-# Aan het einde 2 keer dezelfde M
-# random start station update, alleen starten vanaf nog niet gestart station
