@@ -19,11 +19,12 @@ import sys
 import random
 import os
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 print('-'*100)
 print('Welcome to the RailNL case, please fill in the following options.')
 print('-'*100)
-print('\n\n')
 
 
 # files that are to be loaded
@@ -31,16 +32,16 @@ connectionsHolland = 'Data/ConnectiesHolland.csv'
 connectionsNationaal = 'Data/ConnectiesNationaal.csv'
 stationsHolland = 'Data/StationsHolland.csv'
 stationsNationaal = 'Data/StationsNationaal.csv'
-train_north = 'How many trains do you want to use? It is only possible to choose a number between 1 and 7'
-train_holland = 'How many trains do you want to use? It is only possible to choose a number between 1 and 20'
-text_maps = 'Which map do you want to use? \n For the map of North and South Holland choose "North" \n For the map of whole of the Netherlands choose "NL"'
+train_north = '\nHow many trains do you want to use? It is only possible to choose a number between 1 and 7\n'
+train_holland = '\nHow many trains do you want to use? It is only possible to choose a number between 1 and 20\n'
+text_maps = '\nWhich map do you want to use? \n For the map of North and South Holland choose "North" \n For the map of whole of the Netherlands choose "NL"\n'
 
 
 # the way main.py is run
 while True:
-    print('please fill in which algorithm you want to choose: \n\
-    ' + '-'*100 + '\n For the Dijkstra Algorithm choose "a" \n For the Greedy Algorithm \
-    choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n To exit type exit \n ')
+    print('\nPlease fill in which algorithm you want to choose: \n\
+' + '-'*100 + '\nFor the Dijkstra Algorithm choose "a" \nFor the Greedy Algorithm \
+choose "b" \nFor the Hillclimber Algorithm choose "c" \nFor the Random Algorithm choose "d" \nTo exit type exit \n ')
     algorithm = input()
 
     # based on input certain functions from helperfiles are called
@@ -57,7 +58,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
+                        clear_screen()
                         holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
                         run_greedy_dijkstra.run_greedy(connectionsHolland, holland)
                         break
@@ -74,7 +75,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
+                        clear_screen()
                         nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
                         run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
                         break
@@ -98,8 +99,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
                         run_greedy.run_greedy(connectionsHolland, holland)
                         break
@@ -116,8 +116,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
                         run_greedy.run_greedy(connectionsNationaal, nationaal)
                         break
@@ -141,8 +140,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
                         hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                         break
@@ -159,8 +157,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
                         hillclimber_algorithm.main(maps, train_hillclimber, totaal)
                         break
@@ -184,8 +181,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         totaal = run_random_algorithm.load_map(connectionsHolland)
                         random_algorithm.main(maps, train_random, totaal)
                         break
@@ -202,8 +198,7 @@ while True:
                         print('try again')
                         continue
                     else:
-                        os.system('cls')
-                        os.system('clear')
+                        clear_screen()
                         totaal = run_random_algorithm.load_map(connectionsNationaal)
                         random_algorithm.main(maps, train_random, totaal)
                         break
