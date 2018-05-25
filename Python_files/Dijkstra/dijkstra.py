@@ -92,19 +92,28 @@ def dijkstra(begin, holland, p_path, minutes):
                 previous[neighbor.id] = min_node
                 goal = previous[neighbor.id]
 
-
+            # determine whether total distance from begin station
+            # will exceed time constraint
             if shortest_distance[neighbor.id] > 180:
+
+                # if so pop last added station
                 shortest_distance.pop(neighbor.id)
 
+                # set goal to station before lastly added station
                 goal = previous[neighbor.id]
                 breaker = True
+
+                # break out of forloop
                 break
 
+        # pop station from unvisited_stations, because visited
         unvisited_stations.pop(min_node)
 
+        # if breaker was set to true, break out of while loop
         if breaker:
             break
 
+    # paste all connections after another to create path of train
     current = goal
     while current != begin:
 
@@ -118,7 +127,7 @@ def dijkstra(begin, holland, p_path, minutes):
         except KeyError:
             print("path not reachable")
             break
-
+    
     # append to p_path to get p
     p_path.append(path)
 

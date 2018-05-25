@@ -1,3 +1,11 @@
+# Hintzen, Joost - 10434143
+# Heijningen, Rutger van - 10272224
+# Kemmere, Simon - 10798250
+#
+# Function that runs Dijkstra algorithm x amount of times.
+# Data that gets loaded in depends on the configuration chosen in
+# main.py.
+
 import csv
 import random
 import math
