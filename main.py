@@ -20,7 +20,7 @@ import random
 import os
 
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear && printf "\e[3j"')
 
 print('-'*100)
 print('Welcome to the RailNL case, please fill in the following options.')
