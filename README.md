@@ -1,9 +1,11 @@
 RailNL
 -------------
-In de provincies Noord- en Zuid-Holland liggen in totaal 22 treinstations met tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, die bereden dienen te worden met maximaal 7 treinen.
 
-In Nederland bevinden zich 89 stations 
-Van deze 22 stations zijn er 7 door RailNL als kritiek bestempeld: Alkmaar, Amsterdam Centraal, Den Haag Centraal, Gouda, Haarlem, Rotterdam Centraal en Zaandam. Als deze stations niet regelmatig aangedaan worden treden er in de Randstad enorme logistieke problemen op door de grote aantallen overstappers op deze stations. De spoorverbindingen van en naar deze stations worden daarom kritieke verbindingen genoemd.
+
+In de provincies Noord- en Zuid-Holland liggen in totaal 22 treinstations met tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, die bereden dienen te worden met maximaal 7 treinen.
+![Noord- en Zuid-Holland](https://github.com/joosthintzen40/railNL/blob/master/Visualisaties/kaart%20noord%20zuidholland.png)
+
+In heel Nederland liggen in totaal 89 treinstations met tussenliggende spoorverbindingen en bijbehorende reistijden in minuten, die bereden dienen te worden met maximaal 20 treinen.
 
 Namen
 -------------
