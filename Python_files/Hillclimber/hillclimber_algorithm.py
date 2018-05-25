@@ -408,7 +408,7 @@ def main(maps, trains, totaal):
     print("")
     print("Average Score = %.2f" %(average/count))
     print("Highest Score = %.2f" %(final_score))
-    print("Finetuned Score = %.2f" %(master_score))
+    print("Finetuned Score = %.2f" %(final_score + master_score))
     print("")
 
     # Layout
