@@ -275,14 +275,9 @@ def hillclimber(tracks, h_score):
                         continue
 
         tracks_left = len(totaal) - len(all_tracks)
-        # print tracks_left
-        # print(len(totaal)/2.)
-        # Score function
+
         p = float(tracks_left) / (len(totaal)/2.)
-        # print p
-        # print total_minutes
         traject_score = ((p * 10000) - (amount_of_trains * 20 + total_minutes / 10.))
-        # print traject_score, hill_score
 
         if p > high_p:
             high_p = p
@@ -307,31 +302,51 @@ def fine_tune(fine_tune_track):
     fine_tuned_track = fine_tune_track
 
     for train in fine_tuned_track:
-        print""
+        # print""
         if train == fine_tuned_track[amount_of_trains]:
             break
+
+        value = 0
+        traject_place = 0
+
+        while (traject_place < (len(train) - 3)):
+            if train[value]["M"] == train[value + 1]["M"] and train[value + 1]["M"] == train[value + 2]["M"]:
+                train.remove(train[value + 1])
+                train.remove(train[value + 1])
+                traject_place += 3
+            else:
+                traject_place += 1
+            train_length = len(train)
+
+            value += 1
+
+    for train in fine_tuned_track:
+        # print""
+        if train == fine_tuned_track[amount_of_trains]:
+            break
+
         end_1 = (len(train) - 2)
         end_2 = (len(train) - 1)
 
-        for track in train:
-            print track
+        # for track in train:
+        #     print track
 
         # print train[end_1]
         # print train[end_2]
-        print""
-        print train[end_1]["M"]
-        print train[end_2]["M"]
+        # print""
+        # print train[end_1]["M"]
+        # print train[end_2]["M"]
 
         if train[end_1]["M"] == train[end_2]["M"]:
-            print"hello"
-            print train[end_2]
+            # print"hello"
+            # print train[end_2]
             train.remove(train[end_2])
             fine_tune_counter += 1
-        print ""
-
-        for track in train:
-            print track
-        print ""
+        # print ""
+        #
+        # for track in train:
+        #     print track
+        # print ""
 
     return fine_tuned_track, fine_tune_score
 
