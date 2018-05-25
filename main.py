@@ -1,3 +1,11 @@
+# Hintzen, Joost - 10434143
+# Heijningen, Rutger van - 10272224
+# Kemmere, Simon - 10798250
+#
+# Script that calls every needed algorithm as per the input of the user.
+# Main.py is in such a way defined that there should be no need for the user
+# to look in the algorithm files and make changes. Main.py (and all other files)
+# should be compatible for every OS.
 
 from Python_files.Greedy import graph_Simon2, run_greedy
 from Python_files.Dijkstra import dijkstra, run_greedy_dijkstra
@@ -18,6 +26,7 @@ print('-'*100)
 print('\n\n')
 
 
+# files that are to be loaded
 connectionsHolland = 'Data/ConnectiesHolland.csv'
 connectionsNationaal = 'Data/ConnectiesNationaal.csv'
 stationsHolland = 'Data/StationsHolland.csv'
@@ -27,13 +36,15 @@ train_holland = 'How many trains do you want to use? It is only possible to choo
 text_maps = 'Which map do you want to use? \n For the map of North and South Holland choose "North" \n For the map of whole of the Netherlands choose "NL"'
 
 
-
-
+# the way main.py is run
 while True:
     print('please fill in which algorithm you want to choose: \n\
     ' + '-'*100 + '\n For the Dijkstra Algorithm choose "a" \n For the Greedy Algorithm \
     choose "b" \n For the Hillclimber Algorithm choose "c" \n For the Random Algorithm choose "d" \n ')
     algorithm = input()
+
+    # based on input certain functions from helperfiles are called
+    # to let the chosen algorithm run
     if algorithm == "a":
         print(text_maps)
         while True:
@@ -53,6 +64,8 @@ while True:
 
                 break
 
+            # based on input certain functions from helperfiles are called
+            # to let the chosen algorithm run
             elif maps == 'NL':
                 print(train_holland)
                 while True:
@@ -71,6 +84,8 @@ while True:
                 print('try again')
                 continue
 
+    # based on input certain functions from helperfiles are called
+    # to let the chosen algorithm run
     elif algorithm == "b":
         print(text_maps)
         while True:
@@ -91,6 +106,8 @@ while True:
 
                 break
 
+            # based on input certain functions from helperfiles are called
+            # to let the chosen algorithm run
             elif maps == 'NL':
                 print(train_holland)
                 while True:
@@ -110,6 +127,8 @@ while True:
                 print('try again')
                 continue
 
+    # based on input certain functions from helperfiles are called
+    # to let the chosen algorithm run
     elif algorithm == "c":
         print(text_maps)
         while True:
@@ -130,6 +149,8 @@ while True:
 
                 break
 
+            # based on input certain functions from helperfiles are called
+            # to let the chosen algorithm run
             elif maps == 'NL':
                 print(train_holland)
                 while True:
@@ -149,6 +170,8 @@ while True:
                 print('try again')
                 continue
 
+    # based on input certain functions from helperfiles are called
+    # to let the chosen algorithm run
     elif algorithm == "d":
         print(text_maps)
         while True:
@@ -169,6 +192,8 @@ while True:
 
                 break
 
+            # based on input certain functions from helperfiles are called
+            # to let the chosen algorithm run
             elif maps == 'NL':
                 print(train_holland)
                 while True:
