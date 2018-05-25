@@ -3,6 +3,7 @@ import math
 import random
 from critical_connections_simon import check_list
 from itertools import chain
+import copy
 
 class Station:
     def __init__(self, node):
@@ -26,6 +27,9 @@ class Station:
 
     def get_distance(self, neighbor):
         return self.adjacent[neighbor]
+    def __iter__(self):
+        return iter(self.adjacent.values())
+
 
 class Graph:
     def __init__(self):
@@ -50,7 +54,7 @@ class Graph:
         else:
             return None
 
-    def add_connection(self, frm, to, distance = 0):
+    def add_connection(self, frm, to, distance = 0, number=-1):
         if frm not in self.vert_dict:
             self.add_station(frm)
         if to not in self.vert_dict:
@@ -87,7 +91,7 @@ g = Graph()
 
 
 # loading in stations and connections
-with open('ConnectiesHolland.csv', 'r') as csvfile:
+with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/ConnectiesHolland.csv', 'r') as csvfile:
     nlreader = csv.reader(csvfile)
     for row in nlreader:
         g.add_station(row[0])
@@ -101,52 +105,74 @@ def dijkstra(begin):
 
     shortest_distance = {}
     previous = {}
-    unvisited_stations = g.vert_dict
+    stations = g.vert_dict
+    stadio = g.vert_dict
+    unvisited_stations = copy.copy(g.vert_dict)
     infinity = math.inf
     path = []
 
-    for station in unvisited_stations:
-        shortest_distance[station] = infinity
-    shortest_distance[begin] = 0
+    # for station in unvisited_stations:
+    #     shortest_distance[station] = infinity
+    # shortest_distance[begin] = 0
 
     breaker = False
-    huidig = []
+    min_node = None
+    station = None
+    tot_dist = 0
+    trajectlist = []
     while unvisited_stations:
-        min_node = None
-        for node in unvisited_stations:
-            if min_node is None:
-                min_node = node
-            elif shortest_distance[node] < shortest_distance[min_node]:
-                min_node = node
 
+        if min_node is None:
+            min_node = stations[begin]
+        else:
+            min_node = station
 
-        for neighbor, distance in g.vert_dict[min_node].adjacent.items():
+        neighbor_dict = {}
+        for neighbor, distance in stations[min_node.id].adjacent.items():
 
-            if distance + shortest_distance[min_node] < shortest_distance[neighbor.id]:
-                shortest_distance[neighbor.id] = distance + shortest_distance[min_node]
-                previous[neighbor.id] = min_node
-                goal = previous[neighbor.id]
-                huidig.append(goal)
-                print(huidig)
+            if neighbor is None:
 
-            if shortest_distance[neighbor.id] > 120:
-                shortest_distance.pop(neighbor.id)
-                #previous.pop(neighbor.id)
-                #print(neighbor.id)
-                #print(previous)
-                goal = previous[neighbor.id]
+                goal = previous[min_node.id]
+
                 breaker = True
                 break
+            # if unvisited_stations[station]
+
+            neighbor_dict.update({neighbor: distance})
+
+            station = min(neighbor_dict.items(), key=lambda x:x[1])[0]
+            distance = min(neighbor_dict.items(), key=lambda x:x[1])[1]
+
+            print(station, distance)
 
 
 
-        unvisited_stations.pop(min_node)
+        # stations[station].adjacent = {key:val for key, val in stations[station].adjacent.items() if val != distance}
+        # filter(unvisited_stations[station].adjacent.items(), lambda x: x[1] == min_node)
+
+
+        # previous[station.id] = min_node.id
+        trajectlist.append(min_node.id)
+
+
+        if  tot_dist + distance > 120:
+
+                goal = previous[station.id]
+                break
+
+        tot_dist += distance
+
+        stations[min_node.id].adjacent[station] = infinity
+        stations[station.id].adjacent[min_node] = infinity
+
+
+        unvisited_stations.pop(min_node.id)
 
 
 
-        if breaker:
 
-            break
+
+
 
     current = goal
     while current != begin:
@@ -163,8 +189,8 @@ def dijkstra(begin):
             break
 
 
-    # if shortest_distance[goal] != infinity:
-    #     print("shortest distance is " + str(shortest_distance[goal]))
+    # if shortest_distance != infinity:
+    #     print("shortest distance is " + str(tot_dist))
     #     print("the path is" + str(path))
 
     # append to p_path to get p
@@ -172,18 +198,13 @@ def dijkstra(begin):
 
 
     # make list of minutes per trajectory
-    minutes.append(shortest_distance[current])
+    minutes.append(tot_dist)
 
 
 
-# calling of dijkstra algorithm
-
-
-
-p_path = []
-minutes = []
 score_list = []
 list_stations = []
+count = 0
 
 with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv', 'r') as stationsfile:
     stationreader = csv.reader(stationsfile)
@@ -191,16 +212,22 @@ with open('C:/Users/TU Delf SID/Documents/GitHub/railNL/Data/StationsHolland.csv
         list_stations.append(row[0])
 
 
-for j in range(1000):
+for j in range(1):
+    p_path = []
+    minutes = []
     lijst = []
+    path_list = []
+    p_list = []
 
-    for i in range(6):
+    for i in range(1):
         station = random.choice(list_stations)
         lijst.append(station)
         list_stations.remove(station)
-        dijkstra(station)
+        dijkstra("Dordrecht")
+        count += 1
 
     list_stations.extend(lijst)
+
 
     print(j)
     p_list = list(chain.from_iterable(p_path))
@@ -214,8 +241,10 @@ for j in range(1000):
 
     p = len(list(uniq))/28
 
-    score = Score(p, 6, sum(minutes))
-    score_list.append(score.get_score())
+    score = Score(p, 5, sum(minutes))
+
+    print(score.get_score())
+    score_list.insert(0, score.get_score())
 
 print(max(score_list))
 
