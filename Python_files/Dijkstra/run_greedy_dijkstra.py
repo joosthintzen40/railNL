@@ -16,7 +16,7 @@ from Python_files.Dijkstra import dijkstra
 
 
 
-def run_greedy(data, holland):
+def run_greedy(data, holland, iterations):
     score_list = []
     list_stations = []
     score_max = 0
@@ -26,7 +26,7 @@ def run_greedy(data, holland):
         for row in stationreader:
             list_stations.append(row[0])
 
-    for j in range(10000):
+    for j in range(iterations):
 
         p_path = []
         minutes = []

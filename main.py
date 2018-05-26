@@ -28,6 +28,7 @@ print('-'*100)
 
 
 # files that are to be loaded
+openings_text = '\nPlease fill in which algorithm you want to choose: \n' + '-'*100 + '\nFor the Dijkstra Algorithm choose "a" \nFor the Greedy Algorithm choose "b" \nFor the Hillclimber Algorithm choose "c" \nFor the Random Algorithm choose "d" \nTo exit type exit \n '
 connectionsHolland = 'Data/ConnectiesHolland.csv'
 connectionsNationaal = 'Data/ConnectiesNationaal.csv'
 stationsHolland = 'Data/StationsHolland.csv'
@@ -35,177 +36,88 @@ stationsNationaal = 'Data/StationsNationaal.csv'
 train_north = '\nHow many trains do you want to use? It is only possible to choose a number between 1 and 7\n'
 train_holland = '\nHow many trains do you want to use? It is only possible to choose a number between 1 and 20\n'
 text_maps = '\nWhich map do you want to use? \n For the map of North and South Holland choose "North" \n For the map of whole of the Netherlands choose "NL"\n'
+text_iterations = '\nHow many iterations would you like to run?\n'
 
+
+def choose_algorithm(algorithm):
+    print(text_maps)
+    while True:
+        maps = input()
+        if maps == 'North':
+            print(train_north)
+            while True:
+                train_dijkstra = int(input())
+                if train_dijkstra > 7 or train_dijkstra < 1:
+                    print('try again')
+                    continue
+                else:
+                    while True:
+                        print(text_iterations)
+                        iterations = int(input())
+                        clear_screen()
+                        if algorithm == 'a':
+                            holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
+                            run_greedy_dijkstra.run_greedy(connectionsHolland, holland, iterations)
+                            break
+                        elif algorithm == 'b':
+                            holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
+                            run_greedy.run_greedy(connectionsHolland, holland, iterations)
+                            break
+                        elif algorithm == 'c':
+                            totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
+                            hillclimber_algorithm.main(maps, train_hillclimber, totaal, iterations)
+                            break
+                        elif algorithm == 'd':
+                            totaal = run_random_algorithm.load_map(connectionsHolland)
+                            random_algorithm.main(maps, train_random, totaal, iterations)
+                            break
+                    break
+
+            break
+
+        # based on input certain functions from helperfiles are called
+        # to let the chosen algorithm run
+        elif maps == 'NL':
+            print(train_holland)
+            while True:
+                train_dijkstra = int(input())
+                if train_dijkstra > 20 or train_dijkstra < 1:
+                    print('try again')
+                    continue
+                else:
+                    while True:
+                        print(text_iterations)
+                        iterations = int(input())
+                        clear_screen()
+                        if algorithm == 'a':
+                            nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
+                            run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal, iterations)
+                            break
+                        elif algorithm == 'b':
+                            nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
+                            run_greedy.run_greedy(connectionsNationaal, nationaal, iterations)
+                            break
+                        elif algorithm == 'c':
+                            totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
+                            hillclimber_algorithm.main(maps, train_hillclimber, totaal, iterations)
+                            break
+                        elif algorithm == 'd':
+                            totaal = run_random_algorithm.load_map(connectionsNationaal)
+                            random_algorithm.main(maps, train_random, totaal, iterations)
+                            break
+                    break
+
+            break
+        else:
+            print('try again')
+            continue
 
 # the way main.py is run
 while True:
-    print('\nPlease fill in which algorithm you want to choose: \n\
-' + '-'*100 + '\nFor the Dijkstra Algorithm choose "a" \nFor the Greedy Algorithm \
-choose "b" \nFor the Hillclimber Algorithm choose "c" \nFor the Random Algorithm choose "d" \nTo exit type exit \n ')
+    print(openings_text)
     algorithm = input()
+    if algorithm == 'a' or algorithm == 'b' or algorithm == 'c' or algorithm == 'd':
+        choose_algorithm(algorithm)
 
-    # based on input certain functions from helperfiles are called
-    # to let the chosen algorithm run
-    if algorithm == "a":
-        print(text_maps)
-        while True:
-            maps = input()
-            if maps == 'North':
-                print(train_north)
-                while True:
-                    train_dijkstra = int(input())
-                    if train_dijkstra > 7 or train_dijkstra < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
-                        run_greedy_dijkstra.run_greedy(connectionsHolland, holland)
-                        break
-
-                break
-
-            # based on input certain functions from helperfiles are called
-            # to let the chosen algorithm run
-            elif maps == 'NL':
-                print(train_holland)
-                while True:
-                    train_dijkstra = int(input())
-                    if train_dijkstra > 20 or train_dijkstra < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
-                        run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal)
-                        break
-
-                break
-            else:
-                print('try again')
-                continue
-
-    # based on input certain functions from helperfiles are called
-    # to let the chosen algorithm run
-    elif algorithm == "b":
-        print(text_maps)
-        while True:
-            maps = input()
-            if maps == 'North':
-                print(train_north)
-                while True:
-                    train_greedy = int(input())
-                    if train_greedy > 7 or train_greedy < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
-                        run_greedy.run_greedy(connectionsHolland, holland)
-                        break
-
-                break
-
-            # based on input certain functions from helperfiles are called
-            # to let the chosen algorithm run
-            elif maps == 'NL':
-                print(train_holland)
-                while True:
-                    train_greedy = int(input())
-                    if train_greedy > 20 or train_greedy < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
-                        run_greedy.run_greedy(connectionsNationaal, nationaal)
-                        break
-
-                break
-            else:
-                print('try again')
-                continue
-
-    # based on input certain functions from helperfiles are called
-    # to let the chosen algorithm run
-    elif algorithm == "c":
-        print(text_maps)
-        while True:
-            maps = input()
-            if maps == 'North':
-                print(train_north)
-                while True:
-                    train_hillclimber = int(input())
-                    if train_hillclimber > 7 or train_hillclimber < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
-                        hillclimber_algorithm.main(maps, train_hillclimber, totaal)
-                        break
-
-                break
-
-            # based on input certain functions from helperfiles are called
-            # to let the chosen algorithm run
-            elif maps == 'NL':
-                print(train_holland)
-                while True:
-                    train_hillclimber = int(input())
-                    if train_hillclimber > 20 or train_hillclimber < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
-                        hillclimber_algorithm.main(maps, train_hillclimber, totaal)
-                        break
-
-                break
-            else:
-                print('try again')
-                continue
-
-    # based on input certain functions from helperfiles are called
-    # to let the chosen algorithm run
-    elif algorithm == "d":
-        print(text_maps)
-        while True:
-            maps = input()
-            if maps == 'North':
-                print(train_north)
-                while True:
-                    train_random = int(input())
-                    if train_random > 7 or train_random < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        totaal = run_random_algorithm.load_map(connectionsHolland)
-                        random_algorithm.main(maps, train_random, totaal)
-                        break
-
-                break
-
-            # based on input certain functions from helperfiles are called
-            # to let the chosen algorithm run
-            elif maps == 'NL':
-                print(train_holland)
-                while True:
-                    train_random = int(input())
-                    if train_random > 20 or train_random < 1:
-                        print('try again')
-                        continue
-                    else:
-                        clear_screen()
-                        totaal = run_random_algorithm.load_map(connectionsNationaal)
-                        random_algorithm.main(maps, train_random, totaal)
-                        break
-                break
-
-            else:
-                print('try again')
-                continue
     elif algorithm == 'exit':
         break

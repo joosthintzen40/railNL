@@ -16,7 +16,7 @@ from Python_files.Greedy import graph_Simon2
 
 
 
-def run_greedy(data, holland):
+def run_greedy(data, holland, iterations):
 
     # create liste for storing scores and stations
     score_list = []
@@ -31,7 +31,7 @@ def run_greedy(data, holland):
 
 
     # determines how many times the algorithm is run
-    for j in range(10000):
+    for j in range(iterations):
 
 
         # create lists to store upcoming information
