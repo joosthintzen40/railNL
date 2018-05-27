@@ -16,7 +16,7 @@ from Python_files.Dijkstra import dijkstra
 
 
 
-def run_greedy(data, holland, iterations):
+def run_greedy(data, holland, iterations, p_driven):
     score_list = []
     list_stations = []
     score_max = 0
@@ -53,7 +53,7 @@ def run_greedy(data, holland, iterations):
             if not (s in uniq or (s[1], s[0]) in uniq):
                 uniq.add(s)
 
-        p = len(list(uniq))/28
+        p = len(list(uniq))/p_driven
         score_greedy = dijkstra.Score(p, holland.train, sum(minutes)).get_score()
 
         if score_greedy > score_max:

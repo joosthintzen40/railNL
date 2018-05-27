@@ -16,7 +16,7 @@ from Python_files.Greedy import graph_Simon2
 
 
 
-def run_greedy(data, holland, iterations):
+def run_greedy(data, holland, iterations, p_driven):
 
     # create liste for storing scores and stations
     score_list = []
@@ -76,7 +76,7 @@ def run_greedy(data, holland, iterations):
                 uniq.add(s)
 
         # amount of unique items corresponds with amount of ridden connections
-        p = len(list(uniq))/28
+        p = len(list(uniq))/p_driven
 
         # calculate score
         score_greedy = graph_Simon2.Score(p, holland.train, sum(minutes)).get_score()
