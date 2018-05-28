@@ -188,6 +188,8 @@ def main(maps, trains, totaal, iterations):
         h_score, tracks = run(totaal, run_map, amount_of_trains)
         average += h_score
 
+        print(h_score)
+
         if h_score > max_score:
             max_score = h_score
             final_track = tracks
@@ -199,6 +201,7 @@ def main(maps, trains, totaal, iterations):
         sys.stdout.flush()
 
     # Print maximum traject score
+    print("")
     print("\n")
     print("Average Score = %.2f" %(average/count))
     print("Highest Score = %.2f" %(max_score))
