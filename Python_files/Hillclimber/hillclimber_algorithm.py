@@ -274,8 +274,9 @@ def fine_tune(fine_tune_track, amount_of_trains):
 
     # Loop trains
     for train in fine_tuned_track:
-        if train == fine_tuned_track[amount_of_trains - 1]:
+        if train == fine_tuned_track[amount_of_trains]:
             break
+
         value = 0
         traject_length = len(train)
 
