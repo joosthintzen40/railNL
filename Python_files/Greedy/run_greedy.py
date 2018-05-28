@@ -16,7 +16,7 @@ from Python_files.Greedy import graph_Simon2
 
 
 
-def run_greedy(data, holland, iterations, p_driven, maps_minutes):
+def run_greedy(data, holland, iterations, p_driven, map_minutes):
 
     # create liste for storing scores and stations
     score_list = []
@@ -56,12 +56,14 @@ def run_greedy(data, holland, iterations, p_driven, maps_minutes):
             # use begin station in greedy algorithm
             graph_Simon2.greedy(station, holland, p_path, minutes, map_minutes)
 
+
+
         # renew list of all stations by appending removed (begin) stations
         list_stations.extend(lijst)
 
         # keep track of amount of iterations
-        sys.stdout.write("\riteration: %i" %(j))
-        sys.stdout.flush()
+        #sys.stdout.write("\riteration: %i" %(j))
+        #sys.stdout.flush()
 
         # unchain the paths of all stations
         p_list = list(chain.from_iterable(p_path))
@@ -80,6 +82,8 @@ def run_greedy(data, holland, iterations, p_driven, maps_minutes):
 
         # calculate score
         score_greedy = graph_Simon2.Score(p, holland.train, sum(minutes)).get_score()
+
+        print(score_greedy)
 
         # remember score if score is higher than all previous ones
         if score_greedy > score_max:
