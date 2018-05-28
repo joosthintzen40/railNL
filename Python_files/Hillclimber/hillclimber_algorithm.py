@@ -43,7 +43,7 @@ def start_position(totaal, run_map, amount_of_trains, amount_of_minutes):
 
     # Array
     if run_map == 'North':
-        dienstregeling = [[],[],[],[],[],[],[]]
+        dienstregeling = [[],[],[],[],[],[],[],[]]
     elif run_map == 'NL':
         dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     else:
@@ -167,7 +167,7 @@ def hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill
 
         # Array
         if run_map == 'North':
-            dienstregeling = [[],[],[],[],[],[],[]]
+            dienstregeling = [[],[],[],[],[],[],[],[]]
         elif run_map == 'NL':
             dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
         else:
