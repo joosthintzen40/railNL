@@ -41,8 +41,8 @@ def run_greedy(data, holland, iterations, p_driven, maps_minutes):
             dijkstra.dijkstra(station, holland, p_path, minutes, maps_minutes)
 
         list_stations.extend(lijst)
-        sys.stdout.write("\riteration: %i" %(j))
-        sys.stdout.flush()
+        # sys.stdout.write("\riteration: %i" %(j))
+        # sys.stdout.flush()
 
         p_list = list(chain.from_iterable(p_path))
 
@@ -55,6 +55,7 @@ def run_greedy(data, holland, iterations, p_driven, maps_minutes):
 
         p = len(list(uniq))/p_driven
         score_greedy = dijkstra.Score(p, holland.train, sum(minutes)).get_score()
+
 
         if score_greedy > score_max:
                 score_max = score_greedy
@@ -71,3 +72,6 @@ def run_greedy(data, holland, iterations, p_driven, maps_minutes):
         train_count += 1
     print("")
     print("The score of these trajectories account for", score_max, "points")
+
+    print('gemiddelde is: ', sum(score_list)/len(score_list))
+    print('maximum is: ', max(score_list))

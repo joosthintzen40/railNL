@@ -83,7 +83,7 @@ def run_greedy(data, holland, iterations, p_driven, map_minutes):
         # calculate score
         score_greedy = graph_Simon2.Score(p, holland.train, sum(minutes)).get_score()
 
-        print(score_greedy)
+
 
         # remember score if score is higher than all previous ones
         if score_greedy > score_max:
@@ -103,3 +103,6 @@ def run_greedy(data, holland, iterations, p_driven, map_minutes):
         train_count += 1
     print("")
     print("The score of these trajectories account for", score_max, "points")
+
+    print('gemiddelde is: ', sum(score_list)/len(score_list))
+    print('maximum is: ', max(score_list))
