@@ -395,7 +395,7 @@ def main(maps, trains, totaal, iterations):
         count += 1
 
         # Counter
-        sys.stdout.write("\rHillclimber count = %i" %(count))
+        sys.stdout.write("Hillclimber count = %i\r" %(count))
         sys.stdout.flush()
 
     # Fine tuning track
