@@ -1,0 +1,11 @@
+To Do:
+
+- Voor alle algoritmen LIJNCHART maken met daarin het scoreverloop over 1.000 iteraties.
+- 1.000 alle algoritmen runnen voor het bepalen van de beste score, BARCHART. 
+	- Ieder algoritme naast elkaar met hetzelfde aantal treinen en iteraties.
+	- Y-as = gem score en een grafiek voor max-score
+	- X-as = aantal treinen/algoritme
+-  Bovenstaand vergelijken tussen Noord- en Zuid-Holland en Heel nederland.
+
+- Maken van presentatie.
+- Verhaal voor presentatie.
