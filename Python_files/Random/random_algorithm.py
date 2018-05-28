@@ -197,7 +197,7 @@ def main(maps, trains, totaal, iterations):
         count += 1
 
         # Counter
-        sys.stdout.write("\rRandom count = %i" %(count))
+        sys.stdout.write("Random count = %i\r" %(count))
         sys.stdout.flush()
 
     # Print maximum traject score
