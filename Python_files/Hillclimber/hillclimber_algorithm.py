@@ -274,8 +274,6 @@ def fine_tune(fine_tune_track, amount_of_trains):
 
     # Loop trains
     for train in fine_tuned_track:
-        if train == fine_tuned_track[amount_of_trains]:
-            break
 
         value = 0
         traject_length = len(train)
@@ -302,6 +300,9 @@ def fine_tune(fine_tune_track, amount_of_trains):
         if train[end_2]["M"] == train[end_1]["M"]:
             time_off.append(train[end_1]["Tijd"])
             del train[end_1]
+
+        if train == fine_tuned_track[amount_of_trains - 1]:
+            break
 
     # Raise score with deleted tracks
     fine_tune_score = (sum(time_off) / 10.)
@@ -418,13 +419,13 @@ def main(maps, trains, totaal, iterations):
 
     # Print traject
     for train in master_track:
-        if train == master_track[amount_of_trains]:
-            break
         print("")
         print("Train %i" %(train_number))
         for track in train:
             print(track)
         train_number += 1
+        if train == master_track[amount_of_trains - 1]:
+            break
 
 # Run script
 if __name__ == "__main__":
