@@ -56,7 +56,7 @@ class Holland:
 
 
 # dijkstra greedy algorithm
-def dijkstra(begin, holland, p_path, minutes):
+def dijkstra(begin, holland, p_path, minutes, maps_minutes):
 
     # instantiate variables/dicts/lists
     shortest_distance = {}
@@ -94,7 +94,7 @@ def dijkstra(begin, holland, p_path, minutes):
 
             # determine whether total distance from begin station
             # will exceed time constraint
-            if shortest_distance[neighbor.id] > 180:
+            if shortest_distance[neighbor.id] > maps_minutes:
 
                 # if so pop last added station
                 shortest_distance.pop(neighbor.id)
@@ -127,7 +127,7 @@ def dijkstra(begin, holland, p_path, minutes):
         except KeyError:
             print("path not reachable")
             break
-    
+
     # append to p_path to get p
     p_path.append(path)
 

@@ -16,7 +16,7 @@ from Python_files.Dijkstra import dijkstra
 
 
 
-def run_greedy(data, holland, iterations, p_driven):
+def run_greedy(data, holland, iterations, p_driven, maps_minutes):
     score_list = []
     list_stations = []
     score_max = 0
@@ -38,7 +38,7 @@ def run_greedy(data, holland, iterations, p_driven):
             station = random.choice(list_stations)
             lijst.append(station)
             list_stations.remove(station)
-            dijkstra.dijkstra(station, holland, p_path, minutes)
+            dijkstra.dijkstra(station, holland, p_path, minutes, maps_minutes)
 
         list_stations.extend(lijst)
         sys.stdout.write("\riteration: %i" %(j))

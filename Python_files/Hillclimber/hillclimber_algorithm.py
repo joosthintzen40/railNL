@@ -343,7 +343,7 @@ def layout_2(run_map):
         print("______________________________________________________")
 
 # Main
-def main(maps, trains, totaal):
+def main(maps, trains, totaal, iterations):
 
     # Choose which map you want (noord_zuid_holland or nationaal)
     run_map = maps
@@ -354,12 +354,12 @@ def main(maps, trains, totaal):
         min_minutes = 381
         amount_of_minutes = 120
         break_hill_after = 1000
-        run_times = 100
+        run_times = iterations
     elif run_map == 'NL':
         min_minutes = 1551
         amount_of_minutes = 180
         break_hill_after = 1000
-        run_times = 30
+        run_times = iterations
     else:
         print("No valid map selected!")
         sys.exit()

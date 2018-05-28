@@ -57,7 +57,7 @@ class Holland:
 
 
 # greedy algorithm
-def greedy(begin, holland, p_path, minutes):
+def greedy(begin, holland, p_path, minutes, map_minutes):
 
     # instantiate variables/dicts/lists
     stations = copy.deepcopy(holland.graph.vert_dict)
@@ -98,7 +98,7 @@ def greedy(begin, holland, p_path, minutes):
 
         # determine whether total distance + distance of begin station
         # to be will exceed time constraint
-        if  tot_dist + distance < 181:
+        if  tot_dist + distance < map_minutes:
             trajectlist.append(min_node.id)
         else:
             break

@@ -16,7 +16,7 @@ from Python_files.Greedy import graph_Simon2
 
 
 
-def run_greedy(data, holland, iterations, p_driven):
+def run_greedy(data, holland, iterations, p_driven, maps_minutes):
 
     # create liste for storing scores and stations
     score_list = []
@@ -54,7 +54,7 @@ def run_greedy(data, holland, iterations, p_driven):
             list_stations.remove(station)
 
             # use begin station in greedy algorithm
-            graph_Simon2.greedy(station, holland, p_path, minutes)
+            graph_Simon2.greedy(station, holland, p_path, minutes, map_minutes)
 
         # renew list of all stations by appending removed (begin) stations
         list_stations.extend(lijst)

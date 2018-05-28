@@ -39,6 +39,8 @@ text_maps = '\nWhich map do you want to use? \n For the map of North and South H
 text_iterations = '\nHow many iterations would you like to run?\n'
 p_driven_holland = 28
 p_driven_nationaal = 89
+map_minutes_holland = 121
+map_minutes_nationaal = 181
 
 def choose_algorithm(algorithm, p_driven_holland, p_driven_nationaal):
     print(text_maps)
@@ -47,8 +49,8 @@ def choose_algorithm(algorithm, p_driven_holland, p_driven_nationaal):
         if maps == 'North':
             print(train_north)
             while True:
-                train_dijkstra = int(input())
-                if train_dijkstra > 7 or train_dijkstra < 1:
+                train_amounts = int(input())
+                if train_amounts > 7 or train_amounts < 1:
                     print('try again')
                     continue
                 else:
@@ -57,20 +59,20 @@ def choose_algorithm(algorithm, p_driven_holland, p_driven_nationaal):
                         iterations = int(input())
                         clear_screen()
                         if algorithm == 'a':
-                            holland = dijkstra.Holland(train_dijkstra, connectionsHolland)
-                            run_greedy_dijkstra.run_greedy(connectionsHolland, holland, iterations, p_driven_holland)
+                            holland = dijkstra.Holland(train_amounts, connectionsHolland)
+                            run_greedy_dijkstra.run_greedy(connectionsHolland, holland, iterations, p_driven_holland, map_minutes_holland)
                             break
                         elif algorithm == 'b':
-                            holland = graph_Simon2.Holland(train_greedy, connectionsHolland)
-                            run_greedy.run_greedy(connectionsHolland, holland, iterations, p_driven_holland)
+                            holland = graph_Simon2.Holland(train_amounts, connectionsHolland)
+                            run_greedy.run_greedy(connectionsHolland, holland, iterations, p_driven_holland, map_minutes_holland)
                             break
                         elif algorithm == 'c':
                             totaal = run_hillclimbing_algorithm.load_map(connectionsHolland)
-                            hillclimber_algorithm.main(maps, train_hillclimber, totaal, iterations)
+                            hillclimber_algorithm.main(maps, train_amounts, totaal, iterations)
                             break
                         elif algorithm == 'd':
                             totaal = run_random_algorithm.load_map(connectionsHolland)
-                            random_algorithm.main(maps, train_random, totaal, iterations)
+                            random_algorithm.main(maps, train_amounts, totaal, iterations)
                             break
                     break
 
@@ -81,8 +83,8 @@ def choose_algorithm(algorithm, p_driven_holland, p_driven_nationaal):
         elif maps == 'NL':
             print(train_holland)
             while True:
-                train_dijkstra = int(input())
-                if train_dijkstra > 20 or train_dijkstra < 1:
+                train_amounts = int(input())
+                if train_amounts > 20 or train_amounts < 1:
                     print('try again')
                     continue
                 else:
@@ -91,20 +93,20 @@ def choose_algorithm(algorithm, p_driven_holland, p_driven_nationaal):
                         iterations = int(input())
                         clear_screen()
                         if algorithm == 'a':
-                            nationaal = dijkstra.Holland(train_dijkstra, connectionsNationaal)
-                            run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal, iterations, p_driven_nationaal)
+                            nationaal = dijkstra.Holland(train_amounts, connectionsNationaal)
+                            run_greedy_dijkstra.run_greedy(connectionsNationaal, nationaal, iterations, p_driven_nationaal, map_minutes_nationaal)
                             break
                         elif algorithm == 'b':
-                            nationaal = graph_Simon2.Holland(train_greedy, connectionsNationaal)
-                            run_greedy.run_greedy(connectionsNationaal, nationaal, iterations, p_driven_nationaal)
+                            nationaal = graph_Simon2.Holland(train_amounts, connectionsNationaal)
+                            run_greedy.run_greedy(connectionsNationaal, nationaal, iterations, p_driven_nationaal, map_minutes_nationaal)
                             break
                         elif algorithm == 'c':
                             totaal = run_hillclimbing_algorithm.load_map(connectionsNationaal)
-                            hillclimber_algorithm.main(maps, train_hillclimber, totaal, iterations)
+                            hillclimber_algorithm.main(maps, train_amounts, totaal, iterations)
                             break
                         elif algorithm == 'd':
                             totaal = run_random_algorithm.load_map(connectionsNationaal)
-                            random_algorithm.main(maps, train_random, totaal, iterations)
+                            random_algorithm.main(maps, train_amounts, totaal, iterations)
                             break
                     break
 
