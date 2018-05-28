@@ -358,7 +358,7 @@ def main(maps, trains, totaal, iterations):
     elif run_map == 'NL':
         min_minutes = 1551
         amount_of_minutes = 180
-        break_hill_after = 1000
+        break_hill_after = 5000
         run_times = iterations
     else:
         print("No valid map selected!")
