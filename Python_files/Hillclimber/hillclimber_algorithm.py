@@ -246,6 +246,7 @@ def hillclimber(tracks, h_score, amount_of_minutes, amount_of_trains, break_hill
         p = float(tracks_left) / (len(totaal)/2.)
         traject_score = ((p * 10000) - (amount_of_trains * 20 + total_minutes / 10.))
 
+
         # Store highest P per hillclimber
         if p > high_p:
             high_p = p
@@ -305,7 +306,6 @@ def fine_tune(fine_tune_track, amount_of_trains):
 
     # Raise score with deleted tracks
     fine_tune_score = (sum(time_off) / 10.)
-
     return fine_tuned_track, fine_tune_score
 
 # Layout function
@@ -388,7 +388,7 @@ def main(maps, trains, totaal, iterations):
         if hill_score > final_score:
             final_score = hill_score
             final_track = best_track
-
+        print(final_score)
         if p_value == 1.0:
             p_times += 1
 
