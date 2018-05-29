@@ -45,7 +45,7 @@ def run(totaal, run_map, amount_of_trains):
 
     # Array
     if run_map == 'North':
-        dienstregeling = [[],[],[],[],[],[],[]]
+        dienstregeling = [[],[],[],[],[],[],[],[]]
     elif run_map == 'NL':
         dienstregeling = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     else:
