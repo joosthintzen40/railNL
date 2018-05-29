@@ -1,0 +1,56 @@
+________________________________________________________________
+Running Hillclimber Algorithm on the map 'North & South Holland'
+________________________________________________________________
+
+Amount of trains = 4
+Amount of attemps before hillclimber breaks = 2000
+Amount of times hillclimber runs = 20000
+Upperbound Score = 9881.90
+
+Hillclimber count = 20000
+
+Amount of times p has a value of 1.0 = 168
+
+Average Score = 9173.35
+Highest Score = 9880.40
+Fine tuned Score = 9880.40
+
+________________________________________________________________
+
+Train 1
+{'Begin': 'Beverwijk', 'Eind': 'Zaandam', 'Tijd': 25, 'M': 26}
+{'Begin': 'Zaandam', 'Eind': 'Hoorn', 'Tijd': 26, 'M': 27}
+{'Begin': 'Hoorn', 'Eind': 'Alkmaar', 'Tijd': 24, 'M': 0}
+{'Begin': 'Alkmaar', 'Eind': 'Castricum', 'Tijd': 9, 'M': 10}
+{'Begin': 'Castricum', 'Eind': 'Zaandam', 'Tijd': 12, 'M': 25}
+{'Begin': 'Zaandam', 'Eind': 'Amsterdam Sloterdijk', 'Tijd': 6, 'M': 6}
+{'Begin': 'Amsterdam Sloterdijk', 'Eind': 'Amsterdam Zuid', 'Tijd': 16, 'M': 7}
+
+Train 2
+{'Begin': 'Gouda', 'Eind': 'Den Haag Centraal', 'Tijd': 18, 'M': 12}
+{'Begin': 'Den Haag Centraal', 'Eind': 'Delft', 'Tijd': 13, 'M': 11}
+{'Begin': 'Delft', 'Eind': 'Schiedam Centrum', 'Tijd': 7, 'M': 24}
+{'Begin': 'Schiedam Centrum', 'Eind': 'Rotterdam Centraal', 'Tijd': 5, 'M': 22}
+{'Begin': 'Rotterdam Centraal', 'Eind': 'Dordrecht', 'Tijd': 17, 'M': 14}
+
+Train 3
+{'Begin': 'Den Haag Centraal', 'Eind': 'Leiden Centraal', 'Tijd': 12, 'M': 13}
+{'Begin': 'Leiden Centraal', 'Eind': 'Heemstede-Aerdenhout', 'Tijd': 13, 'M': 18                                                                                                                                                                                               }
+{'Begin': 'Heemstede-Aerdenhout', 'Eind': 'Haarlem', 'Tijd': 6, 'M': 17}
+{'Begin': 'Haarlem', 'Eind': 'Beverwijk', 'Tijd': 16, 'M': 16}
+{'Begin': 'Beverwijk', 'Eind': 'Castricum', 'Tijd': 13, 'M': 9}
+{'Begin': 'Castricum', 'Eind': 'Alkmaar', 'Tijd': 9, 'M': 10}
+{'Begin': 'Alkmaar', 'Eind': 'Den Helder', 'Tijd': 36, 'M': 1}
+
+Train 4
+{'Begin': 'Heemstede-Aerdenhout', 'Eind': 'Haarlem', 'Tijd': 6, 'M': 17}
+{'Begin': 'Haarlem', 'Eind': 'Amsterdam Sloterdijk', 'Tijd': 11, 'M': 5}
+{'Begin': 'Amsterdam Sloterdijk', 'Eind': 'Amsterdam Centraal', 'Tijd': 6, 'M':                                                                                                                                                                                                4}
+{'Begin': 'Amsterdam Centraal', 'Eind': 'Amsterdam Amstel', 'Tijd': 8, 'M': 3}
+{'Begin': 'Amsterdam Amstel', 'Eind': 'Amsterdam Zuid', 'Tijd': 10, 'M': 2}
+{'Begin': 'Amsterdam Zuid', 'Eind': 'Schiphol Airport', 'Tijd': 6, 'M': 8}
+{'Begin': 'Schiphol Airport', 'Eind': 'Leiden Centraal', 'Tijd': 15, 'M': 20}
+{'Begin': 'Leiden Centraal', 'Eind': 'Alphen a/d Rijn', 'Tijd': 14, 'M': 19}
+{'Begin': 'Alphen a/d Rijn', 'Eind': 'Gouda', 'Tijd': 19, 'M': 15}
+{'Begin': 'Gouda', 'Eind': 'Rotterdam Alexander', 'Tijd': 10, 'M': 21}
+{'Begin': 'Rotterdam Alexander', 'Eind': 'Rotterdam Centraal', 'Tijd': 8, 'M': 2                                                                                                                                                                                               3}
